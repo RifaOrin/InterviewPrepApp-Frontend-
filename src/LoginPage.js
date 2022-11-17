@@ -1,7 +1,7 @@
 function LoginPage() {
     return (
         <div className="LoginPage">
-        <h1> hello this is login page, is this working?</h1>
+        <h1> login page</h1>
         
         
         </div>

@@ -1,6 +1,8 @@
 
 import HomePage from './HomePage';
 import LoginPage from './LoginPage';
+import Post from './post';
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,12 +16,18 @@ function App() {
       
       
       <Router>
+        
       <Routes>
           <Route path="/" element={<HomePage/>}></Route>
         </Routes>
         <Routes>
           <Route path="/login" element={<LoginPage/>}></Route>
         </Routes>
+        <Routes>
+          <Route path="/post" element={<Post/>}></Route>
+        </Routes>
+        
+        
       </Router>
       
       
