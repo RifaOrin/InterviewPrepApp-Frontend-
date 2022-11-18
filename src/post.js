@@ -40,6 +40,8 @@ function Post() {
             return(
                 <div className="Feed">
                     <h2>{title}</h2>
+                    <p>Posted on - {date}</p>
+                    <p>Posted by - {author}</p>
                     <p>{text}</p>
                 </div>
             )
