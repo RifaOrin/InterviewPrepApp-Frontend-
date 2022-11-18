@@ -2,15 +2,33 @@ import {useEffect, useState} from "react";
 import axios from 'axios';
 const baseUrl = "http://127.0.0.1:8000/post/"
 function Post() {
-    const [apiUrl, setApiUrl] = useState(baseUrl);
     const [myPost, setPostData] = useState([]);
     const [isError, setIsError] = useState("");
+    const[nextUrl, setNextUrl] = useState();
+    const[previousUrl, setPreviousUrl] = useState();
     useEffect(() => {
         axios
-          .get(apiUrl)
-          .then((response) => setPostData(response.data.results))
+          .get(baseUrl)
+          .then((response) => {
+              setPostData(response.data.results)
+              setNextUrl(response.data.next)
+              setPreviousUrl(response.data.previous)
+            })
           .catch((error) => setIsError(error.message));
       }, []);
+    
+    const PaginationHandler = (url) => {
+        axios
+          .get(url)
+          .then((response) => {
+            setPostData(response.data.results)
+            setNextUrl(response.data.next)
+            setPreviousUrl(response.data.previous)
+          }) 
+          .catch((error) => setIsError(error.message));
+    }
+    
+    
      
     return (
         <div className="Post">
@@ -27,6 +45,10 @@ function Post() {
             )
         
         })}
+        {previousUrl &&
+        <button onClick={()=>PaginationHandler(previousUrl)}>Previous</button>}
+        {nextUrl &&
+        <button onClick={()=>PaginationHandler(nextUrl)}>Next</button>}
         </div>
         
       
