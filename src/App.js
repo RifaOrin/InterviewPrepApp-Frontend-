@@ -5,6 +5,7 @@ import Post from './post';
 import Profile from './profile';
 import NewPost from './newPost';
 import PostDetailPage from './postDetail';
+import SignUp from './signUp';
 
 import {
   BrowserRouter as Router,
@@ -39,7 +40,9 @@ function App() {
         <Routes>
           <Route path="/post/:post_id" element={<PostDetailPage/>}></Route>
         </Routes>
-        
+        <Routes>
+          <Route path="/signup" element={<SignUp/>}></Route>
+        </Routes>
       </Router>
       
       
