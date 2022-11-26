@@ -1,6 +1,8 @@
+import './LoginPage.css';
+
 import {useEffect, useState} from "react";
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 const Url = "http://127.0.0.1:8000/auth/jwt/create/"
 function LoginPage() {
     const [username, setUsername] = useState("");
@@ -26,18 +28,31 @@ function LoginPage() {
     }
     return (
         <div className="LoginPage">
-            <h1> login page</h1>
-            <div>
-                <label for="username"><b>Username: </b></label>
-                <input type="text" placeholder="Enter Username" name="username" onChange={(e)=>setUsername(e.target.value)}/>
+            
+            <h1> Login </h1>
+            <form>
+            <div className="txt_field">
+                
+                <input type="text" onChange={(e)=>setUsername(e.target.value)} required/>
+                <span></span>
+                <label>Username</label>
+                
             </div>
             
-            <div>
-                <label for="password"><b>Password: </b></label>
-                <input type="password" placeholder="Enter Password" name="password" onChange={(e)=>setPassword(e.target.value)} />
-            </div> 
+            <div className="txt_field">
+                
+                <input type="password" onChange={(e)=>setPassword(e.target.value)} required/>
+                <span></span>
+                <label>Password</label>
+            </div>
+            <div className="pass">Forgot Password?</div> 
             
-            <button onClick = {logindata}>Login</button>
+            <input type="submit" value="Login"/>
+            
+            <div className="signup_link">
+                Don't Have An Account? <Link to="/signup">Sign Up</Link>
+            </div>
+            </form>
         
         </div>
         
