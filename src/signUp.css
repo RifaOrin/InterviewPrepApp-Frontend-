@@ -6,8 +6,7 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-
-body {
+.signupbody{
   background-color: #4b111b;
   width: 100%;
   min-height: 100vh;
@@ -17,7 +16,7 @@ body {
   justify-content: center;
 }
 
-button,
+.Register,
 input {
   border: none;
   outline: none;
