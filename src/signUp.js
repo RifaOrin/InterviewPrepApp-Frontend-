@@ -1,6 +1,8 @@
+import './signUp.css';
+
 import {useEffect, useState} from "react";
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 const Url = "http://127.0.0.1:8000/auth/users/"
 
 function SignUp(){
@@ -30,24 +32,40 @@ function SignUp(){
     }
     return(
         <div className="singupPage">
-            <h1>Sign up</h1>
-            <div>
-                <label for="username"><b>Username: </b></label>
-                <input type="text" placeholder="Enter Username" name="username" onChange={(e)=>setUsername(e.target.value)}/>
-            </div>
             
-            <div>
-                <label for="password"><b>Password: </b></label>
-                <input type="password" placeholder="Enter Password" name="password" onChange={(e)=>setPassword(e.target.value)} />
-            </div> 
+            <form  class="signup">
+            <h1 className="title">Create account</h1>
+            <h2>Already have an account? <span><Link to = '/login'>Log in</Link></span></h2>
 
-            <div>
-                <label for="Email"><b>Email Address: </b></label>
-                <input type="email" placeholder="Enter Email Address" name="Email" onChange={(e)=>setEmail(e.target.value)} />
-            </div> 
+               <div class="signup__field">
+                    <input class="signup__input" type="text" name="username" id="username" onChange={(e)=>setUsername(e.target.value)} required />
+                    <label class="signup__label" for="username">Username</label>
+              </div>
+
+             <div class="signup__field">
+                    <input class="signup__input" type="text" name="email" id="email" onChange={(e)=>setEmail(e.target.value)} required />
+                    <label class="signup__label" for="email">Email</label>
+            </div>
+
+            <div class="signup__field">
+                   <input class="signup__input" type="password" name="password" id="password" onChange={(e)=>setPassword(e.target.value)}required />
+                   <label class="signup__label" for="password">Password</label>
+           </div>
+
+
             
-            <button onClick = {signin}>Sign Up</button>
+                
+            
+            
+            <button className="Register" onClick={signin}>Sign Up</button>
+            
+
+            </form> 
+            
+            
+            
+        
         </div>
-    )
+    );
 }
 export default SignUp;

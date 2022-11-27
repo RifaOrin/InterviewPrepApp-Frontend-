@@ -47,7 +47,8 @@ function LoginPage() {
             </div>
             <div className="pass">Forgot Password?</div> 
             
-            <input type="submit" value="Login"/>
+            <button className="button" onClick={logindata}>Login</button>
+            
             
             <div className="signup_link">
                 Don't Have An Account? <Link to="/signup">Sign Up</Link>
