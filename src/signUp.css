@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
-.signupbody{
+.signup{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -115,6 +115,7 @@ h2 span {
   font-size: 1.2rem;
   border-radius: 25px;
   cursor: pointer;
+  font-family: "Poppins", sans-serif;
 }
 
 .Register:hover {
