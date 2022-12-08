@@ -31,6 +31,7 @@ function SignUp(){
 
     }
     return(
+        <body className="signupbody">
         <div className="singupPage">
             
             <form  class="signup">
@@ -51,6 +52,7 @@ function SignUp(){
                    <input class="signup__input" type="password" name="password" id="password" onChange={(e)=>setPassword(e.target.value)}required />
                    <label class="signup__label" for="password">Password</label>
            </div>
+           
 
 
             
@@ -66,6 +68,7 @@ function SignUp(){
             
         
         </div>
+        </body>
     );
 }
 export default SignUp;
