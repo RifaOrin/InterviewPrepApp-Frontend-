@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
-* {
+.signupbody{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -108,7 +108,7 @@ h2 span {
 }
 
 
-button {
+.Register {
   background: #a4243b;
   color: white;
   padding: 12px 0;
@@ -117,7 +117,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.Register:hover {
   background: #4b111b;
 }
 
