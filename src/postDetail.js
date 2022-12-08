@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from 'axios';
-const baseUrl = "http://127.0.0.1:8000/post/"
+const baseUrl = "http://127.0.0.1:8000/api/post/post/"
 function PostDetailPage() {
     const {post_id} = useParams()
     const [title, setTitle] = useState("");
@@ -15,7 +15,7 @@ function PostDetailPage() {
         axios
           .get(baseUrl + post_id + '/')
           .then((response) => {
-              //console.log(response)
+              console.log(baseUrl + post_id + '/')
               setText(response.data.text)
               setTitle(response.data.title)
               setDate(response.data.date)

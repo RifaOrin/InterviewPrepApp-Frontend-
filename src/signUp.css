@@ -1,13 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
-* {
+.signupbody{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-
-body {
+.signupbody{
   background-color: #4b111b;
   width: 100%;
   min-height: 100vh;
@@ -17,7 +16,7 @@ body {
   justify-content: center;
 }
 
-button,
+.Register,
 input {
   border: none;
   outline: none;
@@ -109,7 +108,7 @@ h2 span {
 }
 
 
-button {
+.Register {
   background: #a4243b;
   color: white;
   padding: 12px 0;
@@ -118,7 +117,6 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.Register:hover {
   background: #4b111b;
 }
-

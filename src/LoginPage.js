@@ -27,6 +27,7 @@ function LoginPage() {
 
     }
     return (
+        <body className="loginpagebody">
         <div className="LoginPage">
             
             <h1> Login </h1>
@@ -56,6 +57,7 @@ function LoginPage() {
             </form>
         
         </div>
+        </body>
         
       
     );

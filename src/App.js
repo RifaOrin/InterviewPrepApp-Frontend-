@@ -6,6 +6,9 @@ import Profile from './profile';
 import NewPost from './newPost';
 import PostDetailPage from './postDetail';
 import SignUp from './signUp';
+import Questions from './questions';
+import Experience from './experience';
+import Entertainment from './entertainment';
 
 import {
   BrowserRouter as Router,
@@ -39,6 +42,15 @@ function App() {
         </Routes>
         <Routes>
           <Route path="/post/:post_id" element={<PostDetailPage/>}></Route>
+        </Routes>
+        <Routes>
+          <Route path="/category/qus" element={<Questions/>}></Route>
+        </Routes>
+        <Routes>
+          <Route path="/category/exp" element={<Experience/>}></Route>
+        </Routes>
+        <Routes>
+          <Route path="/category/ent" element={<Entertainment/>}></Route>
         </Routes>
         <Routes>
           <Route path="/signup" element={<SignUp/>}></Route>
