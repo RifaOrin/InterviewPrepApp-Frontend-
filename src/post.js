@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import axios from 'axios';
 import { useNavigate,Link } from "react-router-dom";
+import NewPost from "./newPost";
+ 
 const baseUrl = "http://127.0.0.1:8000/api/post/post/"
 function Post() {
     const [myPost, setPostData] = useState([]);
@@ -9,6 +11,7 @@ function Post() {
     const[previousUrl, setPreviousUrl] = useState();
     const[postId, setPostId] = useState();
     const navigate = useNavigate();
+    
     useEffect(() => {
         axios
           .get(baseUrl)
@@ -47,6 +50,7 @@ function Post() {
      
     return (
         <div className="Post">
+        <NewPost/>
         <h1> post page</h1>
         
         {isError !== "" && <h2>{isError}</h2>}

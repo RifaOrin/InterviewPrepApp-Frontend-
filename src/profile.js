@@ -30,8 +30,9 @@ function Profile() {
           setUsername(response.data.username)
         })
       .catch((error) => setIsError(error.message));
+      
   }, []);
-
+   
     function logout(){
         window.localStorage.removeItem("accessToken");
         navigate('/')

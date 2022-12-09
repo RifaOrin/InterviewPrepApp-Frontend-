@@ -96,7 +96,7 @@ function NewPost() {
     return (
      <div className="NewPost">
         <h1> new post</h1>
-        <div>
+            <div>
                 <label for="title"><b>Post Title: </b></label>
                 <input type="text" placeholder="Enter Title" name="title" onChange={(e)=>setTitle(e.target.value)}/>
             </div>
