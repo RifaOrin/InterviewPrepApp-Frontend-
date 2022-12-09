@@ -42,7 +42,8 @@ function Profile() {
         {username}
         <br></br>
         <button onClick = {logout} >Log Out</button>
-        {isError !== "" && <h2>{isError}</h2>}
+        {isError == "Request failed with status code 401" && <h2>Please Login or Refresh If Already Logged In</h2>}
+  
         
       </div>
            

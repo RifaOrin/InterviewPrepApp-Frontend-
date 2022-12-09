@@ -13,6 +13,7 @@ function Post() {
         axios
           .get(baseUrl)
           .then((response) => {
+              console.log(response.data.results)
               setPostData(response.data.results)
               setPostId(response.data.results.pk)
               setNextUrl(response.data.next)
