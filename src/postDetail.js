@@ -15,7 +15,13 @@ function PostDetailPage() {
     const [commentData, setComment] = useState([]);
     const[commentTitle, setCommentTitle] = useState("");
     const[commentAuthor, setCommentAuthor] = useState("");
+
+
     useEffect(() => {
+
+      //                                                     AUTHOR that is CURRENTLY LOGGED IN and about to comment (INTERCEPTOR AND .GET)                        
+
+
       axios.interceptors.request.use(
         config => {
           config.headers.authorization = `JWT ${Access}`;
@@ -33,6 +39,11 @@ function PostDetailPage() {
       })
       //console.log(author)
 
+
+
+      //                                                                   POST DETAILS of the CURRENT POST (.GET)
+
+
         axios
           .get(baseUrl + post_id + '/')
           .then((response) => {
@@ -45,10 +56,15 @@ function PostDetailPage() {
               
             })
           .catch((error) => setIsError(error.message));
+
+
+
+          //                                                                 COMMENTS attached with CURRENT POST (.GET)
+
           axios
           .get(baseUrl + post_id + '/comment/')
           .then((res) => {
-              //console.log(res)
+              console.log(res)
               setComment(res.data)
               
               
@@ -57,6 +73,9 @@ function PostDetailPage() {
       }, []);
       
     
+
+    //                                                                      POSTING COMMENT WITH HEADER (.POST)
+
     const commentHandler = (e) => {
       e.preventDefault();
       axios.interceptors.request.use(
@@ -82,6 +101,12 @@ function PostDetailPage() {
       .catch((error) => setIsError(error.message));
       window.location.reload();
     }
+
+    const bumpHandler = (e) => {
+      let newBump = bump + 1
+      setBump(newBump)
+      window.location.reload();
+    }
     return (
         
             
@@ -92,7 +117,8 @@ function PostDetailPage() {
                 <h2>{title}</h2>
                 <p>Posted on - {date}</p>
                 <p>Posted by - {author}</p>
-                <p>Liked by - {bump}  people</p>
+                <p>Upvote - {bump}</p>
+                <button onClick = {bumpHandler}>Upvote</button>
                 <p>{text}</p>
                 <h2>Post Comment</h2>
                 <div>
@@ -103,10 +129,12 @@ function PostDetailPage() {
                 <h2>Comments by -</h2>
                 {commentData.map((comments) => {
                 const {text} = comments;
+                const {author} = comments;
                 return(
                 <div className="Comment">
                     
                     <p>{text}</p>
+                    <p>Commented By - {author} </p>
                 </div>
             )
         

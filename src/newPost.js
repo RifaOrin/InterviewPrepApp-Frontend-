@@ -17,6 +17,8 @@ function NewPost() {
 
   const Access = localStorage.accessToken
 
+  //                                                         AUTHOR that is CURRENTLY LOGGED IN and about to POST (INTERCEPTOR AND .GET)
+
   useEffect(() => {
     axios.interceptors.request.use(
       config => {
@@ -36,6 +38,9 @@ function NewPost() {
     //console.log(author)
   }, [])
 
+
+  //                                                                           IMAGE HANDLING AND POSTING (.POST)
+
   const  handleImage = (e) => {
       console.log(e.target.files)
       setImage(e.target.files[0])
@@ -51,8 +56,8 @@ function NewPost() {
     }
     const config = {
       headers: {
-          "Content-Type": "multipart/form-data",
-          //Authorization: `JWT ${Access}`,
+          //"Content-Type": "multipart/form-data",
+          Authorization: `JWT ${Access}`,
       },
   };
   axios
@@ -62,6 +67,8 @@ function NewPost() {
     })
   }
 
+
+  //                                                                             CREATING NEW POST (.POST)
   const post = (e) =>
   {
     e.preventDefault();

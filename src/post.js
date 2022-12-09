@@ -9,7 +9,6 @@ function Post() {
     const [isError, setIsError] = useState("");
     const[nextUrl, setNextUrl] = useState();
     const[previousUrl, setPreviousUrl] = useState();
-    const[postId, setPostId] = useState();
     const navigate = useNavigate();
     
     useEffect(() => {
@@ -18,7 +17,6 @@ function Post() {
           .then((response) => {
               console.log(response.data.results)
               setPostData(response.data.results)
-              setPostId(response.data.results.pk)
               setNextUrl(response.data.next)
               setPreviousUrl(response.data.previous)
             })
@@ -55,10 +53,10 @@ function Post() {
         
         {isError !== "" && <h2>{isError}</h2>}
         {myPost.map((feed) => {
-            const {title, text, date, author} = feed;
+            const {title, text, date, author, pk} = feed;
             return(
                 <div className="Feed">
-                    <h2>{title}</h2>
+                    <Link to = {'/post/' + pk}><h2>{title}</h2></Link>
                     <p>Posted on - {date}</p>
                     <p>Posted by - {author}</p>
                     <p>{text}</p>
