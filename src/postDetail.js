@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import axios from 'axios';
 const baseUrl = "http://127.0.0.1:8000/api/post/post/"
 const user = "http://127.0.0.1:8000/auth/users/me/"
+
 const Access = localStorage.accessToken
 function PostDetailPage() {
     const {post_id} = useParams()
@@ -47,7 +48,7 @@ function PostDetailPage() {
         axios
           .get(baseUrl + post_id + '/')
           .then((response) => {
-              console.log(baseUrl + post_id + '/')
+              //console.log(baseUrl + post_id + '/')
               setText(response.data.text)
               setTitle(response.data.title)
               setDate(response.data.date)
@@ -59,12 +60,12 @@ function PostDetailPage() {
 
 
 
-          //                                                                 COMMENTS attached with CURRENT POST (.GET)
+          //                                                                 COMMENTS of CURRENT POST (.GET)
 
           axios
           .get(baseUrl + post_id + '/comment/')
           .then((res) => {
-              console.log(res)
+              //console.log(res)
               setComment(res.data)
               
               
@@ -93,18 +94,26 @@ function PostDetailPage() {
           author : commentAuthor
       })
       .then(res => {
-        console.log(res.data)
-   
-        
-        
+        //console.log(res.data)
       })
       .catch((error) => setIsError(error.message));
       window.location.reload();
     }
 
+
+    //                                                               updating BUMP (.PUT)
     const bumpHandler = (e) => {
-      let newBump = bump + 1
-      setBump(newBump)
+      axios
+      .put(baseUrl + post_id + '/', {
+        bump : bump + 1,
+        author : author,
+        text : text,
+        title : title
+      })
+      .then(res => {
+        console.log(res.data.bump)
+      })
+      .catch((error) => setIsError(error.message));
       window.location.reload();
     }
     return (
