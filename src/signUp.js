@@ -36,7 +36,7 @@ function SignUp(){
             
             <form  class="signup">
             <h1 className="title">Create account</h1>
-            <h2>Already have an account? <span><Link to = '/login'>Log in</Link></span></h2>
+            <h2>Already have an account? <span className="spn"><Link to = '/login'>Log in</Link></span></h2>
 
                <div class="signup__field">
                     <input class="signup__input" type="text" name="username" id="username" onChange={(e)=>setUsername(e.target.value)} required />
@@ -59,7 +59,7 @@ function SignUp(){
                 
             
             
-            <button className="Register" onClick={signin}>Sign Up</button>
+            <button className="Register" onClick={signin}><b>Sign Up</b></button>
             
 
             </form> 
