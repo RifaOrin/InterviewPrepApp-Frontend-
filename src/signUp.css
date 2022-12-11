@@ -16,8 +16,8 @@
   justify-content: center;
 }
 
-.Register,
-input {
+.Register, .signup__input
+ {
   border: none;
   outline: none;
 }
@@ -48,7 +48,7 @@ h2 {
   margin-bottom: 40px;
 }
 
-h2 span {
+.spn h2 {
   text-decoration: underline;
   cursor: pointer;
   color: #a4243b;

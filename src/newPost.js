@@ -1,3 +1,4 @@
+import './newPost.css';
 import {useEffect, useState} from "react";
 import axios from 'axios';
 const Url = "http://127.0.0.1:8000/api/post/newpost/"
@@ -101,44 +102,71 @@ function NewPost() {
 
 
     return (
-     <div className="NewPost">
-        <h1> new post</h1>
-            <div>
-                <label for="title"><b>Post Title: </b></label>
-                <input type="text" placeholder="Enter Title" name="title" onChange={(e)=>setTitle(e.target.value)}/>
+      
+     <body className="newpostBody">
+       <div class="grid-container">
+         <div class="grid-item">
+           <h1><b>ZarCode</b></h1>
+         </div>
+    
+       </div>
+       
+        
+       <div className="newpostPage">
+         <form  class="newpost">
+            <h1 className="heading"> Create new post</h1>
+            <div class="whole">
+            <div className="postTitle_field">
+                
+                <input type="text" onChange={(e)=>setTitle(e.target.value)} required/>
+                <span></span>
+                <label>Enter Title</label>
+                
+                
             </div>
             
-            <div>
-                <label for="text"><b>Post Body: </b></label>
-                <input type="text" placeholder="Enter Text" name="text" onChange={(e)=>setText(e.target.value)} />
-            </div> 
-            {/*<div>
+            <div className="posttext_field">
+                
+                <input type="text" onChange={(e)=>setText(e.target.value)} required/>
+                <span></span>
+                <label>Enter Text</label>
+            </div>
+              {/*<div>
                 <label for="author"><b>Author: </b></label>
                 <input type="text" placeholder="Enter Author" name="author" onChange={(e)=>setAuthor(e.target.value)} />
-            </div> */}
+              </div> */}
 
-            {/*<div>
+              {/*<div>
                 <label for="date"><b>Date </b></label>
                 <input type="datetime-local" name="date" onChange={(e)=>setDate(e.target.value)} />
-            </div> */}
+              </div> */}
 
-            <div>
-            <label for="category"><b>Category </b></label>
+            
+            <div class="spt">
+            <div class="postimage_field">
+            <label class="image_label" for="image"><b>Image </b></label>
+                <input class="image_input" type="file" name="image" accept = "image/*" onChange={handleImage} required/>
+                
+            </div> 
+            <div class="postCategory_field">
+            <label class="category_label" for="category"><b>Category </b></label>
               <select name="category" onChange={(e)=>setCategory(e.target.value)}>
                 <option value="qus"  >questions</option>
                 <option value="ent"  >entertainment</option>
                 <option value="exp"  >experiences</option>
               </select>
             </div>
-
-            <div>
-                <label for="image"><b>Image </b></label>
-                <input type="file" name="image" accept = "image/*" onChange={handleImage} />
-            </div> 
             
-            <button onClick = {post}>Post</button>
-            <button onClick = {imagehandle}>Upload Image</button>
+            </div>
+            </div>
+            <div class="btn">
+            <button className="imageButton" onClick = {imagehandle}><b>Upload Image</b></button>
+            <button className="postButton" onClick = {post}><b>Post</b></button>
+            </div>
+            </form> 
       </div>
+       </body>
+      
            
         
       
