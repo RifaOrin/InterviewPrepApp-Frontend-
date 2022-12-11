@@ -19,6 +19,7 @@ function Post() {
               setPostData(response.data.results)
               setNextUrl(response.data.next)
               setPreviousUrl(response.data.previous)
+              
             })
           .catch((error) => setIsError(error.message));
       }, []);
@@ -53,14 +54,33 @@ function Post() {
         
         {isError !== "" && <h2>{isError}</h2>}
         {myPost.map((feed) => {
-            const {title, text, date, author, pk} = feed;
+            const {title, text, date, author, pk, category} = feed;
             return(
-                <div className="Feed">
-                    <Link to = {'/post/' + pk}><h2>{title}</h2></Link>
-                    <p>Posted on - {date}</p>
-                    <p>Posted by - {author}</p>
-                    <p>{text}</p>
+                <div className="card">
+                  <div class="card__img-container">
+                    <img class="card__img" src="//unsplash.it/400/300" alt="random unsplash image" />
+   
+                  </div>
+                  <div class="card__body | flow">
+                      <h3 class="card__title">{title}</h3>
+                  </div>
+                  <div class="card__tags">
+                      {category == 'qus' && <p class="card__tag">Category - Question</p> }
+                      {category == 'ent' && <p class="card__tag">Category - Entertainment</p> }
+                      {category == 'exp' && <p class="card__tag">Category - Experience</p> }
+                          
+                  </div>
+                  <p class="card__date">
+                    Posted On - {date}
+                  </p>
+                  <p>
+                    Posted By - {author}
+                  </p>
+
+                  <Link to = {'/post/' + pk}>Read more</Link>
                 </div>
+                    
+                
             )
         
         })}
