@@ -1,7 +1,11 @@
+import './post.css';
 import {useEffect, useState} from "react";
+import image from './image.png';
 import axios from 'axios';
 import { useNavigate,Link } from "react-router-dom";
 import NewPost from "./newPost";
+
+console.log(image);
  
 const baseUrl = "http://127.0.0.1:8000/api/post/post/"
 function Post() {
@@ -48,40 +52,48 @@ function Post() {
     }
      
     return (
+      
+        <body className="postbody">
+         <NewPost/> 
         <div className="Post">
-        <NewPost/>
-        <h1> post page</h1>
+        
+        <h1 className='head'>Our Latest Posts</h1>
         
         {isError !== "" && <h2>{isError}</h2>}
         {myPost.map((feed) => {
             const {title, text, date, author, pk, category} = feed;
-            return(
+        
+          return(
                 <div className="card">
                   <div class="card__img-container">
-                    <img class="card__img" src="//unsplash.it/400/300" alt="random unsplash image" />
+                    <img class="card__img" src={image} alt="image" />
    
                   </div>
                   <div class="card__body | flow">
                       <h3 class="card__title">{title}</h3>
                   </div>
                   <div class="card__tags">
-                      {category == 'qus' && <p class="card__tag">Category - Question</p> }
-                      {category == 'ent' && <p class="card__tag">Category - Entertainment</p> }
-                      {category == 'exp' && <p class="card__tag">Category - Experience</p> }
+                       <span class="card__tag" >{category}</span>
+                       
+                      
                           
                   </div>
                   <p class="card__date">
                     Posted On - {date}
                   </p>
-                  <p>
+                  <p class="card__date">
                     Posted By - {author}
                   </p>
 
-                  <Link to = {'/post/' + pk}>Read more</Link>
+                  <Link class="card__cta" to = {'/post/' + pk}>Read more</Link>
                 </div>
                     
                 
             )
+          
+            
+        
+            
         
         })}
         {previousUrl &&
@@ -93,7 +105,7 @@ function Post() {
         <button onClick={()=>questions()}>Questions</button>
         <button onClick={()=>entertainment()}>Entertainment</button>
         </div>
-        
+        </body>
       
     );
   }
