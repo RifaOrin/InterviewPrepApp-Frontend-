@@ -16,7 +16,7 @@ function PostDetailPage() {
     const [commentData, setComment] = useState([]);
     const[commentTitle, setCommentTitle] = useState("");
     const[commentAuthor, setCommentAuthor] = useState("");
-
+    const[image, setImage]= useState([]);
 
     useEffect(() => {
 
@@ -71,6 +71,17 @@ function PostDetailPage() {
               
             })
           .catch((error) => setIsError(error.message));
+          //                                                                      Getting Images of Current Post
+
+          axios
+          .get(baseUrl + post_id + '/postImage/')
+          .then((res) => {
+            console.log(res.data)
+            setImage(res.data)
+          })
+
+
+
       }, []);
       
     
@@ -116,6 +127,8 @@ function PostDetailPage() {
       .catch((error) => setIsError(error.message));
       window.location.reload();
     }
+
+   
     return (
         
             
@@ -129,6 +142,15 @@ function PostDetailPage() {
                 <p>Upvote - {bump}</p>
                 <button onClick = {bumpHandler}>Upvote</button>
                 <p>{text}</p>
+                {image.map((images) => {
+                      const {image} = images;
+                      return(
+                        <div className = "image">
+                          <img src={image} />
+                          
+                        </div>
+                      )
+                })}
                 <h2>Post Comment</h2>
                 <div>
                   <label for="comment"><b>Comment: </b></label>

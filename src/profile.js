@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Profile() {
   const [isError, setIsError] = useState("");
@@ -42,6 +42,7 @@ function Profile() {
         <h1> profile page</h1>
         {username}
         <br></br>
+        <Link to = '/profile/edit'>Create Profile</Link>
         <button onClick = {logout} >Log Out</button>
         {isError == "Request failed with status code 401" && <h2>Please Login or Refresh If Already Logged In</h2>}
   

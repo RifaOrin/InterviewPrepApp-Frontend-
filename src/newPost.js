@@ -48,25 +48,36 @@ function NewPost() {
   }
 
   function imagehandle(){
+    /*axios.interceptors.request.use(
+      config => {
+        config.headers.authorization = `JWT ${Access}`;
+        return config;
+      },
+      error => {
+        return Promise.reject(error); 
+      }
+    )*/
     const formdata = new FormData()
     formdata.append('image', image)
+    formdata.append('parent', parent)
     const post = img + pk + '/postImage/'
     for (const value of formdata.values()) {
       console.log(value);
     
     }
-    const config = {
-      headers: {
-          //"Content-Type": "multipart/form-data",
-          Authorization: `JWT ${Access}`,
-      },
-  };
-  axios
-    .post(post, {parent, image : formdata}, config)
+    
+ 
+  axios({
+    method: "post",
+    url: post,
+    data: formdata,
+    headers: { "Content-Type": "multipart/form-data", Authorization: `JWT ${Access}` },
+  })
+  
     .then((res)=>{
       console.log(res)
-    })
-  }
+  })
+};
 
 
   //                                                                             CREATING NEW POST (.POST)
@@ -113,7 +124,7 @@ function NewPost() {
        
         
        <div className="newpostPage">
-         <form  class="newpost">
+         <form  class="newpost" onSubmit={e => e.preventDefault()}>
             <h1 className="heading"> Create new post</h1>
             <div class="whole">
             <div className="postTitle_field">

@@ -61,12 +61,12 @@ function Post() {
         
         {isError !== "" && <h2>{isError}</h2>}
         {myPost.map((feed) => {
-            const {title, text, date, author, pk, category} = feed;
+            const {title, date, author, pk, category} = feed;
         
           return(
                 <div className="card">
                   <div class="card__img-container">
-                    <img class="card__img" src={image} alt="image" />
+                    <img class="card__img" src={image} alt="post image" />
    
                   </div>
                   <div class="card__body | flow">

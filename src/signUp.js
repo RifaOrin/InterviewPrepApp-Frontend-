@@ -10,6 +10,7 @@ function SignUp(){
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const[userId, setUserId] = useState();
     const [isError, setIsError] = useState("");
 
     const signin = (e) =>{
@@ -23,12 +24,12 @@ function SignUp(){
         })
         .then((response) => {   
             console.log(response.data)
-            
+            setUserId(response.data.Object.id)
         
         })
         .catch((error) => setIsError(error.message));
-        navigate('/login')
-
+        navigate('/activate')
+        console.log(userId)
     }
     return(
         <body className="signupbody">

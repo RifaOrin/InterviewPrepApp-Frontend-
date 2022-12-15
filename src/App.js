@@ -9,6 +9,8 @@ import SignUp from './signUp';
 import Questions from './questions';
 import Experience from './experience';
 import Entertainment from './entertainment';
+import Activate from './activate';
+import EditProfile from './editProfile';
 
 import {
   BrowserRouter as Router,
@@ -54,6 +56,12 @@ function App() {
         </Routes>
         <Routes>
           <Route path="/signup" element={<SignUp/>}></Route>
+        </Routes>
+        <Routes>
+          <Route path="/activate" element={<Activate/>}></Route>
+        </Routes>
+        <Routes>
+          <Route path="/profile/edit" element={<EditProfile/>}></Route>
         </Routes>
       </Router>
       
