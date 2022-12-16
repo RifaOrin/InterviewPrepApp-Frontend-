@@ -9,6 +9,7 @@ function EditProfile(){
     const [author, setAuthor] = useState("");
     const[gender, setGender] = useState("");
     const [isError, setIsError] = useState("");
+    const[profileImage, setProfileImage] = useState();
     const Access = localStorage.accessToken
     const navigate = useNavigate();
     useEffect(() => {
@@ -30,22 +31,31 @@ function EditProfile(){
           })
           
     }, [])
+
+    const handleProfileImage = (e) => {
+      console.log(e.target.files)
+      setProfileImage(e.target.files[0])
+    }
     const edit = (e) => {
         e.preventDefault();
-        axios
-        .post(Url, {
-            parent: author,
-            name,
-            works_at : work,
-            gender
-            
+        const formdata = new FormData();
+        formdata.append('parent', author)
+        formdata.append('name', name)
+        formdata.append('works_at', work)
+        formdata.append('gender', gender)
+        formdata.append('avatar', profileImage)
+        axios({
+            method : "post",
+            url : Url,
+            data : formdata,
+            headers: { "Content-Type": "multipart/form-data", Authorization: `JWT ${Access}`},
         })
         .then((response) => {   
             console.log(response.data)
         
         })
         .catch((error) => setIsError(error.message));
-        //navigate('/profile')
+        navigate('/profile')
     }
     return(
         <div className = "EditProfile">
@@ -56,13 +66,13 @@ function EditProfile(){
             <input type="text" onChange={(e)=>setWork(e.target.value)} required/>
             <label>Gender:</label>
             <select name="gender" onChange={(e)=>setGender(e.target.value)}>
-            <option value="m">Male</option>
-
-            <option value="f">Female</option>
-
-            <option value="o" selected>Other</option>
-              </select>
-            <button onClick={edit}>Create/Edit Profile</button>
+              <option value="Male" selected>Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            <label ><b>Profile Picture: </b></label>
+                <input type="file" name="image" accept = "image/*" onChange={handleProfileImage}/>
+            <button onClick={edit}>Create Profile</button>
         </div>
     );
 }

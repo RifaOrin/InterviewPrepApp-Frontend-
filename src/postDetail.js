@@ -6,6 +6,7 @@ const user = "http://127.0.0.1:8000/auth/users/me/"
 
 const Access = localStorage.accessToken
 function PostDetailPage() {
+    //                                                                             Post
     const {post_id} = useParams()
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
@@ -13,11 +14,16 @@ function PostDetailPage() {
     const [author, setAuthor] = useState("");
     const [bump, setBump] = useState("");
     const [isError, setIsError] = useState("");
+
+    //                                                                             Comment
     const [commentData, setComment] = useState([]);
     const[commentTitle, setCommentTitle] = useState("");
     const[commentAuthor, setCommentAuthor] = useState("");
+    const[commentAuthorName, setCommentAuthorName] = useState("");
     const[commentImage, setCommentImage] = useState();
     const[commentshowImage, setCommentShowImage] = useState();
+
+    //                                                                              Image
     const[image, setImage]= useState([]);
     const[coverImage, setCoverImage] = useState([]);
     const[postImage, setPostImage] = useState([]);
@@ -39,6 +45,7 @@ function PostDetailPage() {
       .get(user)
       .then((res) => {
         setCommentAuthor(res.data.id)
+        setCommentAuthorName(res.data.username)
         //console.log(res.data.id)
       })
       //console.log(author)
@@ -115,6 +122,7 @@ function PostDetailPage() {
       formdata.append('text', commentTitle)
       formdata.append('author', commentAuthor)
       //formdata.append('image', commentImage)
+      formdata.append('author_name', commentAuthorName)
       axios({
         method: "post",
         url : commentUrl,
@@ -222,12 +230,12 @@ function PostDetailPage() {
                 <h2>Comments by -</h2>
                 {commentData.map((comments) => {
                 const {text} = comments;
-                const {author} = comments;
+                const {author_name} = comments;
                 return(
                 <div className="Comment">
                     
                     <p>{text}</p>
-                    <p>Commented By - {author} </p>
+                    <p>Commented By - {author_name} </p>
                     <img src = {commentshowImage} />
                 </div>
             )
