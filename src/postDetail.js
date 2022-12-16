@@ -16,8 +16,11 @@ function PostDetailPage() {
     const [commentData, setComment] = useState([]);
     const[commentTitle, setCommentTitle] = useState("");
     const[commentAuthor, setCommentAuthor] = useState("");
+    const[commentImage, setCommentImage] = useState();
+    const[commentshowImage, setCommentShowImage] = useState();
     const[image, setImage]= useState([]);
-
+    const[coverImage, setCoverImage] = useState([]);
+    const[postImage, setPostImage] = useState([]);
     useEffect(() => {
 
       //                                                     AUTHOR that is CURRENTLY LOGGED IN and about to comment (INTERCEPTOR AND .GET)                        
@@ -54,6 +57,7 @@ function PostDetailPage() {
               setDate(response.data.date)
               setAuthor(response.data.author)
               setBump(response.data.bump)
+              setCoverImage(response.data.cover)
               
             })
           .catch((error) => setIsError(error.message));
@@ -71,12 +75,12 @@ function PostDetailPage() {
               
             })
           .catch((error) => setIsError(error.message));
-          //                                                                      Getting Images of Current Post
+          //                                                                    Getting Images of Current Post
 
           axios
           .get(baseUrl + post_id + '/postImage/')
           .then((res) => {
-            console.log(res.data)
+            //console.log(res.data)
             setImage(res.data)
           })
 
@@ -88,8 +92,15 @@ function PostDetailPage() {
 
     //                                                                      POSTING COMMENT WITH HEADER (.POST)
 
+    /*const handleCommentImage = (e) => {
+      console.log(e.target.files)
+      setCommentImage(e.target.files[0])
+    }*/
+
     const commentHandler = (e) => {
       e.preventDefault();
+      const commentUrl = baseUrl + post_id + '/comment/'
+
       axios.interceptors.request.use(
         config => {
           config.headers.authorization = `JWT ${Access}`;
@@ -99,13 +110,20 @@ function PostDetailPage() {
           return Promise.reject(error); 
         }
       )
-      axios
-      .post(baseUrl + post_id + '/comment/',{
-          text : commentTitle,
-          author : commentAuthor
+
+      const formdata = new FormData();
+      formdata.append('text', commentTitle)
+      formdata.append('author', commentAuthor)
+      //formdata.append('image', commentImage)
+      axios({
+        method: "post",
+        url : commentUrl,
+        data: formdata,
+        headers: { "Content-Type": "multipart/form-data"},
       })
       .then(res => {
-        //console.log(res.data)
+        console.log(res.data)
+        //setCommentShowImage(res.data.image)
       })
       .catch((error) => setIsError(error.message));
       window.location.reload();
@@ -128,6 +146,34 @@ function PostDetailPage() {
       window.location.reload();
     }
 
+    //                                                   Posting More Images with Add more Image (.POST)
+
+    const handleImage = (e) => {
+        console.log(e.target.files)
+        setPostImage(e.target.files[0])
+    }
+
+    function imagehandle() {
+      const formdata = new FormData()
+      formdata.append('image', postImage)
+      formdata.append('parent', post_id)
+      const post = baseUrl + post_id + '/postImage/'
+      
+      
+   
+    axios({
+      method: "post",
+      url: post,
+      data: formdata,
+      headers: { "Content-Type": "multipart/form-data", Authorization: `JWT ${Access}` },
+    })
+    
+      .then((res)=>{
+        console.log(res)
+    })
+    window.location.reload();
+    };
+
    
     return (
         
@@ -142,6 +188,16 @@ function PostDetailPage() {
                 <p>Upvote - {bump}</p>
                 <button onClick = {bumpHandler}>Upvote</button>
                 <p>{text}</p>
+
+
+
+                <p>
+                  <img src={coverImage}/>
+                </p>
+                <label ><b>Add More Images: </b></label>
+                <input  type="file" name="image" accept = "image/*" onChange={handleImage}/>
+                <button onClick = {imagehandle}><b>Upload Image</b></button>
+                More Images:
                 {image.map((images) => {
                       const {image} = images;
                       return(
@@ -151,12 +207,18 @@ function PostDetailPage() {
                         </div>
                       )
                 })}
+
+
                 <h2>Post Comment</h2>
                 <div>
                   <label for="comment"><b>Comment: </b></label>
                   <input type="text" name="comment" onChange={(e)=>setCommentTitle(e.target.value)}/>
+                  <label><b>Comment Image: </b></label>
+                  <input type="file" name="image" accept = "image/*" />
                 </div>
                 <button onClick = {commentHandler}>Comment</button>
+
+
                 <h2>Comments by -</h2>
                 {commentData.map((comments) => {
                 const {text} = comments;
@@ -166,6 +228,7 @@ function PostDetailPage() {
                     
                     <p>{text}</p>
                     <p>Commented By - {author} </p>
+                    <img src = {commentshowImage} />
                 </div>
             )
         

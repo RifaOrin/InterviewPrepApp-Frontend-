@@ -34,9 +34,9 @@ function EditProfile(){
         e.preventDefault();
         axios
         .post(Url, {
-            parent_id : author,
+            parent: author,
             name,
-            work,
+            works_at : work,
             gender
             
         })

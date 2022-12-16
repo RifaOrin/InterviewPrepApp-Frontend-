@@ -1,11 +1,11 @@
 import './post.css';
 import {useEffect, useState} from "react";
-import image from './image.png';
+//import image from './image.png';
 import axios from 'axios';
 import { useNavigate,Link } from "react-router-dom";
 import NewPost from "./newPost";
 
-console.log(image);
+//console.log(image);
  
 const baseUrl = "http://127.0.0.1:8000/api/post/post/"
 function Post() {
@@ -61,12 +61,12 @@ function Post() {
         
         {isError !== "" && <h2>{isError}</h2>}
         {myPost.map((feed) => {
-            const {title, date, author, pk, category} = feed;
+            const {title, date, author, pk, category, cover} = feed;
         
           return(
                 <div className="card">
                   <div class="card__img-container">
-                    <img class="card__img" src={image} alt="post image" />
+                    <img class="card__img" src={cover} alt="post image" />
    
                   </div>
                   <div class="card__body | flow">
