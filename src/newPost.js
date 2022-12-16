@@ -81,7 +81,7 @@ function NewPost() {
         console.log(res)
         setPk(res.data.pk)
     })
-    window.location.reload();
+    //window.location.reload(true);
   }
 
 

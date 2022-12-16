@@ -161,7 +161,8 @@ function PostDetailPage() {
         setPostImage(e.target.files[0])
     }
 
-    function imagehandle() {
+    const imagehandle = (e) => {
+      e.preventDefault();
       const formdata = new FormData()
       formdata.append('image', postImage)
       formdata.append('parent', post_id)
@@ -179,7 +180,7 @@ function PostDetailPage() {
       .then((res)=>{
         console.log(res)
     })
-    window.location.reload();
+    //window.location.reload();
     };
 
    

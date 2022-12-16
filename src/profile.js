@@ -9,7 +9,6 @@ function Profile() {
   const [works_at, setWork] = useState("");
   const [gender, setGender] = useState("");
   const [avatar, setAvatar] = useState();
-  const [id, setId] = useState();
   const Access = localStorage.accessToken
 
   const navigate = useNavigate();
@@ -33,19 +32,22 @@ function Profile() {
         "http://127.0.0.1:8000/auth/users/me/"
     )
       .then((response) => {
+          console.log(response.data)
           setUsername(response.data.username)
-          setId(response.data.id)
-        })
+          
+          axios
+          .get("http://127.0.0.1:8000/api/user/profile/" + response.data.id + "/")
+          .then((res) => {
+            setName(res.data.name)
+            setWork(res.data.works_at)
+            setGender(res.data.gender)
+            setAvatar(res.data.avatar)
+          }) 
+      })
       .catch((error) => setIsError(error.message));
-      console.log(id)
-      axios
-      .get("http://127.0.0.1:8000/api/user/profile/" + id + "/")
-      .then((res) => {
-        setName(res.data.name)
-        setWork(res.data.works_at)
-        setGender(res.data.gender)
-        setAvatar(res.data.avatar)
-      }) 
+      
+      
+      
       
   }, []);
    
