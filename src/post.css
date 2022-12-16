@@ -13,7 +13,7 @@
 }
 .head{
     margin: 0 0 30px;
-    padding: 0;
+    padding: 30px;
     text-align: center;
     color: black;
     padding-top: 30px;
@@ -21,16 +21,16 @@
 }
 
 .Post,
-h1,
-h2,
-h3,
-p {
+.head,
+.err,
+.card__title,
+.card__date {
   margin: 0;
 }
 
-h1,
-h2,
-h3 {
+.head,
+.err,
+.card__title {
   line-height: var(--font-lineheight-0);
 }
 

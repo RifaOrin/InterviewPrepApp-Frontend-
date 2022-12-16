@@ -15,7 +15,7 @@
     padding: 0;
     font-family: "Poppins", sans-serif;
     background: linear-gradient(120deg,#2980b9,#8e44ad);
-    height: 80vh;
+    height: 100vh;
     overflow: hidden;
 }
 .newpostPage{
@@ -140,6 +140,7 @@ form .posttext_field{
     margin: -5px 0 20px 5px;
     color: black;
     cursor: pointer;
+    
 }
 .newpostPage form .btn{
     display: flex;

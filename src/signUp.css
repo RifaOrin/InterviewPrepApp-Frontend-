@@ -40,7 +40,7 @@
   text-align: center;
   color: #a4243b;
 }
-h2 {
+.acc {
   text-align: center;
   font-size: 1.2rem;
   font-weight: lighter;
@@ -48,7 +48,7 @@ h2 {
   margin-bottom: 40px;
 }
 
-.spn h2 {
+.spn .acc {
   text-decoration: underline;
   cursor: pointer;
   color: #a4243b;

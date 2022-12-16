@@ -89,14 +89,6 @@ function NewPost() {
     return (
       
      <body className="newpostBody">
-       <div class="grid-container">
-         <div class="grid-item">
-           <h1><b>ZarCode</b></h1>
-         </div>
-    
-       </div>
-       
-        
        <div className="newpostPage">
          <form  class="newpost" onSubmit={e => e.preventDefault()}>
             <h1 className="heading"> Create new post</h1>

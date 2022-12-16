@@ -1,3 +1,4 @@
+import './postDetails.css'
 import { useParams } from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from 'axios';
@@ -14,6 +15,7 @@ function PostDetailPage() {
     const [author, setAuthor] = useState("");
     const [bump, setBump] = useState("");
     const [isError, setIsError] = useState("");
+    const[authorName, setAuthorName] = useState("");
 
     //                                                                             Comment
     const [commentData, setComment] = useState([]);
@@ -65,6 +67,7 @@ function PostDetailPage() {
               setAuthor(response.data.author)
               setBump(response.data.bump)
               setCoverImage(response.data.cover)
+              setAuthorName(response.data.author_name)
               
             })
           .catch((error) => setIsError(error.message));
@@ -188,21 +191,28 @@ function PostDetailPage() {
         
             
                 <div className="PostDetailPage">
-                <h1> details page</h1>
-               
-                {isError !== "" && <h2>{isError}</h2>}
-                <h2>{title}</h2>
-                <p>Posted on - {date}</p>
-                <p>Posted by - {author}</p>
-                <p>Upvote - {bump}</p>
-                <button onClick = {bumpHandler}>Upvote</button>
-                <p>{text}</p>
+                <h1 className = "details"> POST DETAILS</h1>
+                <div className = "detailsCard">
+                  {isError !== "" && <h2>{isError}</h2>}
+                  <div className = "grid-c">
+                    <div className="grid-items"><h1 className="titl">{title}</h1></div>
+                    <div className="grid-items"><img className = "cardImg" src={coverImage}/>
+                    </div>
+                    
+                  </div>
+                  <p className="txti">{text}</p>
+                  <div className="idn">
+                  <p>Posted on - {date}</p>
+                  <p>Posted by - {authorName}</p>
+                  <p>Upvote - {bump}</p>
+                  <button className="like" onClick = {bumpHandler}>Upvote</button>
+                  </div>
+                  
+                </div>
 
 
 
-                <p>
-                  <img src={coverImage}/>
-                </p>
+                
                 <label ><b>Add More Images: </b></label>
                 <input  type="file" name="image" accept = "image/*" onChange={handleImage}/>
                 <button onClick = {imagehandle}><b>Upload Image</b></button>
