@@ -91,27 +91,26 @@ function NewPost() {
      <body className="newpostBody">
        <div className="newpostPage">
          <form  class="newpost" onSubmit={e => e.preventDefault()}>
-            <h1 className="heading"> Create new post</h1>
+            <h1 className="heading"><b>Create new post</b> </h1>
             <div class="whole">
-            <div className="postTitle_field">
-                
-                <input type="text" onChange={(e)=>setTitle(e.target.value)} required/>
-                <span></span>
-                <label>Enter Title</label>
-                
-                
-            </div>
             
-            <div className="posttext_field">
+                <form>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Title" onChange={(e)=>setTitle(e.target.value)} required/>
+                {/*<input type="text" className="input-box" placeholder="Enter Title" onChange={(e)=>setTitle(e.target.value)} required/>*/}
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Text" onChange={(e)=>setText(e.target.value)} required/>
+                {/*<input type="text" className="input-box-text" placeholder="Enter Text"onChange={(e)=>setText(e.target.value)} required/>*/} 
+                </form>
                 
-                <input type="text" onChange={(e)=>setText(e.target.value)} required/>
-                <span></span>
-                <label>Enter Text</label>
-            </div>
+                
+                
+            
+            
+            
             
             <div class="spt">
             <div class="postimage_field">
-            <label class="image_label" for="image"><b>Image </b></label>
+            <label class="image_label" for="image"><b>Image</b></label>
+                
                 <input class="image_input" type="file" name="image" accept = "image/*" onChange={handleImage}/>
                 
             </div> 
@@ -126,7 +125,7 @@ function NewPost() {
             
             </div>
             </div>
-            <div class="btn">
+            <div class="bton">
             <button className="postButton" onClick = {post}><b>Post</b></button>
             </div>
             </form> 
