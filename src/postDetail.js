@@ -1,5 +1,5 @@
 import './postDetails.css'
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from 'axios';
 const baseUrl = "http://127.0.0.1:8000/api/post/post/"
@@ -23,7 +23,7 @@ function PostDetailPage() {
     const[commentAuthor, setCommentAuthor] = useState("");
     const[commentAuthorName, setCommentAuthorName] = useState("");
     const[commentImage, setCommentImage] = useState();
-    const[commentshowImage, setCommentShowImage] = useState();
+    
 
     //                                                                              Image
     const[image, setImage]= useState([]);
@@ -134,10 +134,10 @@ function PostDetailPage() {
       })
       .then(res => {
         console.log(res.data)
-        //setCommentShowImage(res.data.image)
+        
       })
       .catch((error) => setIsError(error.message));
-      window.location.reload();
+      //window.location.reload();
     }
 
 
@@ -203,7 +203,7 @@ function PostDetailPage() {
                   <p className="txti">{text}</p>
                   <div className="idn">
                   <p>Posted on - {date}</p>
-                  <p>Posted by - {authorName}</p>
+                  <p>Posted by - <Link to = {'/profile/' + author}>{authorName}</Link></p>
                   <p>Upvote - {bump}</p>
                   <button className="like" onClick = {bumpHandler}>Upvote</button>
                   </div>
@@ -233,7 +233,7 @@ function PostDetailPage() {
                   <label for="comment"><b>Comment: </b></label>
                   <input type="text" name="comment" onChange={(e)=>setCommentTitle(e.target.value)}/>
                   <label><b>Comment Image: </b></label>
-                  <input type="file" name="image" accept = "image/*" />
+                  <input type="file" name="image" accept = "image/*"  /> {/*onChange={handleCommentImage}*/}
                 </div>
                 <button onClick = {commentHandler}>Comment</button>
 
@@ -242,12 +242,13 @@ function PostDetailPage() {
                 {commentData.map((comments) => {
                 const {text} = comments;
                 const {author_name} = comments;
+                //const{image} = comments;
                 return(
                 <div className="Comment">
                     
                     <p>{text}</p>
                     <p>Commented By - {author_name} </p>
-                    <img src = {commentshowImage} />
+                    {/*<img src = {image} />*/}
                 </div>
             )
         

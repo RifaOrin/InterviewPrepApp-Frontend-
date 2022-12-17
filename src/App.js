@@ -11,6 +11,7 @@ import Experience from './experience';
 import Entertainment from './entertainment';
 import Activate from './activate';
 import EditProfile from './editProfile';
+import People from './people';
 
 import {
   BrowserRouter as Router,
@@ -62,6 +63,9 @@ function App() {
         </Routes>
         <Routes>
           <Route path="/profile/edit" element={<EditProfile/>}></Route>
+        </Routes>
+        <Routes>
+          <Route path="/profile/:profile_id" element={<People/>}></Route>
         </Routes>
       </Router>
       
