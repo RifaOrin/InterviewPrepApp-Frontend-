@@ -61,7 +61,7 @@ function Post() {
         
         {isError !== "" && <h2>{isError}</h2>}
         {myPost.map((feed) => {
-            const {title, date, author_name, pk, category, cover, author} = feed;
+            const {title, date, author_name, pk, category, cover, author,bump} = feed;
         
           return(
                 <div className="card">
@@ -85,7 +85,7 @@ function Post() {
                     <Link ></Link>
                     Posted By - {author_name}
                   </p>
-
+                  <p class="card__date">Likes - {bump}</p>
                   <Link class="card__cta" to = {'/post/' + pk}>Read more</Link>
                 </div>
                     

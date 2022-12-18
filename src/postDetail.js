@@ -195,50 +195,77 @@ function PostDetailPage() {
                 <div className = "detailsCard">
                   {isError !== "" && <h2>{isError}</h2>}
                   <div className = "grid-c">
-                    <div className="grid-items"><h1 className="titl">{title}</h1></div>
-                    <div className="grid-items"><img className = "cardImg" src={coverImage}/>
+                    <div className="grid-items1"><h1 className="titl">{title}</h1></div>
+                    <div className="grid-items2"><img className = "cardImg" src={coverImage}/>
                     </div>
                     
                   </div>
+                  <div className='t'>
                   <p className="txti">{text}</p>
+                  </div>
                   <div className="idn">
                   <p>Posted on - {date}</p>
-                  <p>Posted by - <Link to = {'/profile/' + author}>{authorName}</Link></p>
-                  <p>Upvote - {bump}</p>
-                  <button className="like" onClick = {bumpHandler}>Upvote</button>
+                  <p>Posted by - <Link className="pro" to = {'/profile/' + author}>{authorName}</Link></p>
+                  <p>Likes - {bump}</p>
+                  
+                  </div>
+                  <div className='b'>
+                  <button className="like" onClick = {bumpHandler}>Like</button>
+                  <button className="editPost">Edit Post</button>
+                  <button className="deletePost">Delete Post</button>
                   </div>
                   
                 </div>
 
 
 
+                <div className='addcard'>
+                {
+                /*<label ><b>Add More Images: </b></label>
+                <input  type="file" name="image" accept = "image/*" onChange={handleImage}/>*/}
                 
-                <label ><b>Add More Images: </b></label>
-                <input  type="file" name="image" accept = "image/*" onChange={handleImage}/>
-                <button onClick = {imagehandle}><b>Upload Image</b></button>
-                More Images:
+                  <label for="formFile" class="form-label">Add more images</label>
+                  <input class="form-control" type="file" id="formFile"/>
+                  
+                <button className='bi' onClick = {imagehandle}><b>Upload Image</b></button>
+                
+                </div>
+                <h1 className="more" >More Images</h1>
                 {image.map((images) => {
                       const {image} = images;
                       return(
+                        <div className='icard'>
                         <div className = "image">
-                          <img src={image} />
+                          <img className='ci' src={image} />
                           
+                        
+                          </div>
                         </div>
+
                       )
                 })}
 
+                <div className='cp'>
+                <h2 className='writeComment'>Post Comment</h2>
+                
+                  
+                  <label for="comment" className='cmnt'><b>Comment: </b></label>
+                  <input type="text" class="form-control" id="hlw" onChange={(e)=>setCommentTitle(e.target.value)}/>
+                  {/*<input type="text" name="comment" onChange={(e)=>setCommentTitle(e.target.value)}/>*/}
+                
+                <div className='cmntimg'>
+                  <label for="formFile" class="form-label">Comment image:</label>
+                  <input class="form-control" type="file" id="formFile"/>
 
-                <h2>Post Comment</h2>
-                <div>
-                  <label for="comment"><b>Comment: </b></label>
-                  <input type="text" name="comment" onChange={(e)=>setCommentTitle(e.target.value)}/>
-                  <label><b>Comment Image: </b></label>
+                  
+                  {/*<label><b>Comment Image: </b></label>
                   <input type="file" name="image" accept = "image/*"  /> {/*onChange={handleCommentImage}*/}
                 </div>
-                <button onClick = {commentHandler}>Comment</button>
+                <button className="cmntbton" onClick = {commentHandler}><b>Comment</b></button>
+                </div>
 
-
-                <h2>Comments by -</h2>
+                
+                <h2 className='com'>Comments</h2>
                 {commentData.map((comments) => {
                 const {text} = comments;
                 const {author_name} = comments;
@@ -246,8 +273,8 @@ function PostDetailPage() {
                 return(
                 <div className="Comment">
                     
-                    <p>{text}</p>
-                    <p>Commented By - {author_name} </p>
+                    <p className='cmnttxt'>{text}</p>
+                    <p className='authortxt'> - {author_name} </p>
                     {/*<img src = {image} />*/}
                 </div>
             )
