@@ -1,4 +1,4 @@
-
+@import "https://unpkg.com/open-props";
 :root {
     --transition: 250ms ease-in-out;
     --brand: var(--blue-8);
