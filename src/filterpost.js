@@ -1,29 +1,27 @@
 import './post.css';
 import {useEffect, useState} from "react";
-//import image from './image.png';
 import axios from 'axios';
-import { useNavigate,Link } from "react-router-dom";
-import NewPost from "./newPost";
+import { Link, useParams } from "react-router-dom";
 
-//console.log(image);
-
-function Post() {
-    const baseUrl = "http://127.0.0.1:8000/api/post/post/"
+function FilterPost() {
+    const {criteria} = useParams()
+    const baseUrl = "http://127.0.0.1:8000/api/post/post/?"
     const [myPost, setPostData] = useState([]);
     const [isError, setIsError] = useState("");
     const[nextUrl, setNextUrl] = useState();
     const[previousUrl, setPreviousUrl] = useState();
-    const navigate = useNavigate();
+    const[count, setCount] = useState("");
     
     useEffect(() => {
+      console.log(baseUrl + criteria)
         axios
-          .get(baseUrl)
+          .get(baseUrl + criteria)
           .then((response) => {
               console.log(response.data.results)
               setPostData(response.data.results)
               setNextUrl(response.data.next)
               setPreviousUrl(response.data.previous)
-              
+              setCount(response.data.count)
             })
           .catch((error) => setIsError(error.message));
       }, []);
@@ -38,40 +36,17 @@ function Post() {
           }) 
           .catch((error) => setIsError(error.message));
     }
-
-    const questions = () => {
-          navigate('/category/qus')
-    }
-
-    const entertainment = () => {
-      navigate('/category/ent')
-    }
-    
-    const experience = () => {
-      navigate('/category/exp')
-    }
      
     return (
       
         <body className="postbody">
-         <NewPost/> 
         <div className="Post">
-        
-        <h1 className='head'>Our Latest Posts</h1>
-        
+        {count =="0" && <h2>No Posts</h2> }
         {isError !== "" && <h2>{isError}</h2>}
-        <Link to="/post/filter/search=Hello">Hello</Link>
-        <Link to="/post/filter/search=Rifa">Rifa</Link>
-        <Link to="/post/filter/ordering=date">Date - Ascending</Link>
-        <Link to="/post/filter/ordering=-date">Date - Descending</Link>
-        <Link to="/post/filter/ordering=bump">Bump - Ascending</Link>
-        <Link to="/post/filter/ordering=-bump">Bump - Descending</Link>
-        <Link to="/post/filter/category=entertainment">Entertainment</Link>
-        <Link to="/post/filter/category=questions">Questions</Link>
-        <Link to="/post/filter/category=experiences">Experiences</Link>
+        
+        
         {myPost.map((feed) => {
             const {title, date, author_name, pk, category, cover, author,bump} = feed;
-        
           return(
                 <div className="card">
                   <div class="card__img-container">
@@ -83,9 +58,6 @@ function Post() {
                   </div>
                   <div class="card__tags">
                        <span class="card__tag" >{category}</span>
-                       
-                      
-                          
                   </div>
                   <p class="card__date">
                     Posted On - {date}
@@ -96,28 +68,16 @@ function Post() {
                   </p>
                   <p class="card__date">Likes - {bump}</p>
                   <Link class="card__cta" to = {'/post/details/' + pk}>Read more</Link>
-                </div>
-                    
-                
+                </div> 
             )
-          
-            
-        
-            
-        
         })}
         {previousUrl &&
         <button onClick={()=>PaginationHandler(previousUrl)}>Previous</button>}
         {nextUrl &&
         <button onClick={()=>PaginationHandler(nextUrl)}>Next</button>}
-
-        <button onClick={()=>experience()}>Experience</button>
-        <button onClick={()=>questions()}>Questions</button>
-        <button onClick={()=>entertainment()}>Entertainment</button>
         </div>
         </body>
       
     );
   }
-  
-  export default Post;
+  export default FilterPost;

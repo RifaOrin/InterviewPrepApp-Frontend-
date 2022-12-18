@@ -205,7 +205,7 @@ function PostDetailPage() {
                   </div>
                   <div className="idn">
                   <p>Posted on - {date}</p>
-                  <p>Posted by - <Link className="pro" to = {'/profile/' + author}>{authorName}</Link></p>
+                  <p>Posted by - <Link className="pro" to = {'/profile/user/' + author}>{authorName}</Link></p>
                   <p>Likes - {bump}</p>
                   
                   </div>

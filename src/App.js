@@ -6,12 +6,10 @@ import Profile from './profile';
 import NewPost from './newPost';
 import PostDetailPage from './postDetail';
 import SignUp from './signUp';
-import Questions from './questions';
-import Experience from './experience';
-import Entertainment from './entertainment';
 import Activate from './activate';
 import EditProfile from './editProfile';
 import People from './people';
+import UserPost from './filterpost';
 
 import {
   BrowserRouter as Router,
@@ -19,6 +17,7 @@ import {
   Route,
   useParams,
 } from "react-router-dom";
+import FilterPost from './filterpost';
 
 function App() {
   return (
@@ -38,22 +37,16 @@ function App() {
           <Route path="/post" element={<Post/>}></Route>
         </Routes>
         <Routes>
+          <Route path="/post/filter/:criteria" element={<FilterPost/>}></Route>
+        </Routes>
+        <Routes>
           <Route path="/profile" element={<Profile/>}></Route>
         </Routes>
         <Routes>
           <Route path="/newpost" element={<NewPost/>}></Route>
         </Routes>
         <Routes>
-          <Route path="/post/:post_id" element={<PostDetailPage/>}></Route>
-        </Routes>
-        <Routes>
-          <Route path="/category/qus" element={<Questions/>}></Route>
-        </Routes>
-        <Routes>
-          <Route path="/category/exp" element={<Experience/>}></Route>
-        </Routes>
-        <Routes>
-          <Route path="/category/ent" element={<Entertainment/>}></Route>
+          <Route path="/post/details/:post_id" element={<PostDetailPage/>}></Route>
         </Routes>
         <Routes>
           <Route path="/signup" element={<SignUp/>}></Route>
@@ -65,7 +58,7 @@ function App() {
           <Route path="/profile/edit" element={<EditProfile/>}></Route>
         </Routes>
         <Routes>
-          <Route path="/profile/:profile_id" element={<People/>}></Route>
+          <Route path="/profile/user/:profile_id" element={<People/>}></Route>
         </Routes>
       </Router>
       
