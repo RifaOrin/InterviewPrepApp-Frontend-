@@ -1,9 +1,9 @@
 @import "https://unpkg.com/open-props";
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap'); 
-/*:root {
+:root {
     --transition: 250ms ease-in-out;
     --brand: var(--blue-8);
-  }*/
+  }
 
 .details{
     line-height: var(--font-lineheight-0);

@@ -65,7 +65,7 @@ picture {
 }
 
 .card {
-  min-height: 600px;
+  min-height: 650px;
   width: min(100% - 2rem, 40rem);
   margin-bottom: 20px;
   background-color: var(--gray-0);
