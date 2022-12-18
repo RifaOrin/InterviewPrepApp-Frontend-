@@ -7,6 +7,7 @@ function People(){
     const [works_at, setWork] = useState("");
     const [gender, setGender] = useState("");
     const [avatar, setAvatar] = useState();
+
     const base = "http://127.0.0.1:8000/api/user/profile/"
     useEffect(()=>{
         axios
