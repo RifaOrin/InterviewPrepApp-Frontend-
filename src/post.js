@@ -1,7 +1,7 @@
 import './post.css';
 import {useEffect, useState} from "react";
 import axios from 'axios';
-import { useNavigate,Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NewPost from "./newPost";
 
 function Post() {
@@ -10,7 +10,6 @@ function Post() {
     const [isError, setIsError] = useState("");
     const[nextUrl, setNextUrl] = useState();
     const[previousUrl, setPreviousUrl] = useState();
-    const navigate = useNavigate();
     
     useEffect(() => {
         axios
@@ -42,13 +41,8 @@ function Post() {
         <div className="Post">
         <h1 className='head'>Our Latest Posts</h1>
         {isError !== "" && <h2>{isError}</h2>}
-        <Link to="/post/filter/ordering=date">Date - Ascending</Link>
-        <Link to="/post/filter/ordering=-date">Date - Descending</Link>
-        <Link to="/post/filter/ordering=bump">Bump - Ascending</Link>
-        <Link to="/post/filter/ordering=-bump">Bump - Descending</Link>
-        <Link to="/post/filter/category=entertainment">Entertainment</Link>
-        <Link to="/post/filter/category=questions">Questions</Link>
-        <Link to="/post/filter/category=experiences">Experiences</Link>
+       
+       
         {myPost.map((feed) => {
             const {title, date, author_name, pk, category, cover, author,bump} = feed;
         

@@ -3,11 +3,12 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 const Url = "http://127.0.0.1:8000/api/user/profile/"
 const user = "http://127.0.0.1:8000/auth/users/me/"
-function EditProfile(){
+function CreateProfile(){
     const[name, setName] = useState("");
     const[work, setWork] = useState("");
     const [author, setAuthor] = useState("");
     const[gender, setGender] = useState("");
+    const[lives, setLives] = useState("");
     const [isError, setIsError] = useState("");
     const[profileImage, setProfileImage] = useState("");
     const[coverPhoto, setCoverPhoto] = useState("");
@@ -38,24 +39,22 @@ function EditProfile(){
       setProfileImage(e.target.files[0])
     }
     const handleCoverPhoto = (e) => {
-        console.log(e.target.files)
-        setCoverPhoto(e.target.files[0])
+      console.log(e.target.files)
+      setCoverPhoto(e.target.files[0])
     }
-    
-    const edit = (e) => {
+    const create = (e) => {
         e.preventDefault();
-        
         const formdata = new FormData();
-        
         formdata.append('parent', author)
         formdata.append('name', name)
         formdata.append('works_at', work)
         formdata.append('gender', gender)
+        formdata.append('lives', lives)
         formdata.append('avatar', profileImage)
         formdata.append('coverPhoto', coverPhoto)
         axios({
-            method : "put",
-            url : Url + author + '/',
+            method : "post",
+            url : Url,
             data : formdata,
             headers: { "Content-Type": "multipart/form-data", Authorization: `JWT ${Access}`},
         })
@@ -70,15 +69,23 @@ function EditProfile(){
         <div className = "EditProfile">
             <h1>Edit Profile</h1>
             <label>Name</label>
-            <input type="text"  onChange={(e)=>setName(e.target.value)} required/>
+            <input type="text" onChange={(e)=>setName(e.target.value)} required/>
             <label>Works at:</label>
-            <input type="text"  onChange={(e)=>setWork(e.target.value)} required/>
-            <label ><b>Change Profile Picture: </b></label>
+            <input type="text" onChange={(e)=>setWork(e.target.value)} required/>
+            <label>Lives in:</label>
+            <input type="text" onChange={(e)=>setLives(e.target.value)} required/>
+            <label>Gender:</label>
+            <select name="gender" onChange={(e)=>setGender(e.target.value)}>
+              <option value="Male" selected>Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            <label ><b>Profile Picture: </b></label>
                 <input type="file" name="image" accept = "image/*" onChange={handleProfileImage}/>
-            <label ><b>Change Cover Photo: </b></label>
+            <label ><b>Cover Photo: </b></label>
                 <input type="file" name="image" accept = "image/*" onChange={handleCoverPhoto}/>
-            <button onClick={edit}>Edit Profile</button>
+            <button onClick={create}>Create Profile</button>
         </div>
     );
 }
-export default EditProfile;
+export default CreateProfile;

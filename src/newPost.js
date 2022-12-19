@@ -90,24 +90,16 @@ function NewPost() {
       
      <body className="newpostBody">
        <div className="newpostPage">
-         <form  class="newpost" onSubmit={e => e.preventDefault()}>
+         <form  className="newpost" onSubmit={e => e.preventDefault()}>
             <h1 className="heading"><b>Create new post</b> </h1>
-            <div class="whole">
             
-                <form>
+            <form className='newposti'>
                 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Title" onChange={(e)=>setTitle(e.target.value)} required/>
                 {/*<input type="text" className="input-box" placeholder="Enter Title" onChange={(e)=>setTitle(e.target.value)} required/>*/}
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Text" onChange={(e)=>setText(e.target.value)} required/>
                 {/*<input type="text" className="input-box-text" placeholder="Enter Text"onChange={(e)=>setText(e.target.value)} required/>*/} 
-                </form>
-                
-                
-                
-            
-            
-            
-            
-            <div class="spt">
+            </form>   
+           <div class="spt">
             <div class="postimage_field">
             <label class="image_label" for="image"><b>Image</b></label>
                 
@@ -124,7 +116,7 @@ function NewPost() {
             </div>
             
             </div>
-            </div>
+            
             <div class="bton">
             <button className="postButton" onClick = {post}><b>Post</b></button>
             </div>
