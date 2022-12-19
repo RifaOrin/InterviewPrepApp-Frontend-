@@ -16,7 +16,8 @@
 .newpost{
     
     min-height: 477px;
-    width: min(100% - 2rem, 40rem);
+    /*width: min(100% - 2rem, 40rem);*/
+    width: 700px;
    margin-bottom: 20px;
    background-color: var(--gray-0);
    box-shadow: var(--shadow-2);
@@ -26,23 +27,27 @@
   transition-property: box-shadow;
   overflow: hidden;
 }
+.newpost:is(:hover, :focus-within) {
+    box-shadow: var(--shadow-3);
+  }
 .heading{
     margin: 0 0 30px;
     padding: 0;
     text-align: center;
     color: black;
     padding-top: 30px;
-    font-weight: 800;
+    font-weight: 400;
     
 
 }
-.newpostPage form{
+.newposti{
     padding: 0 40px;
     box-sizing: border-box;
 }
 #exampleFormControlInput1{
     margin-top: 20px;
     margin-bottom: 20px;
+    
 }
 #exampleFormControlTextarea1{
     margin-bottom: 20px;
@@ -194,7 +199,8 @@ form .posttext_field{
     outline: none;
     padding: 5px 0;
     position: relative;
-    left: 420px;
+    left: 533px;
+    bottom: 21px;
     
   }
   .postButton:hover{
