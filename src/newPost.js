@@ -1,7 +1,7 @@
 import './newPost.css';
 import {useEffect, useState} from "react";
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 const Url = "http://127.0.0.1:8000/api/post/newpost/"
 const img = "http://127.0.0.1:8000/api/post/post/"
 const user = "http://127.0.0.1:8000/auth/users/me/"
@@ -10,13 +10,11 @@ function NewPost() {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [author, setAuthor] = useState("");
-  const [date, setDate] = useState("");
   const [category, setCategory] = useState("");
-  const [isError, setIsError] = useState("");
   const [image, setImage] = useState("");
-  const [pk, setPk] = useState();
-  const [parent,setParent] = useState("");
   const[poster, setPoster] = useState("");
+  const[postError, setPostError] = useState("");
+
   const Access = localStorage.accessToken
   const navigate = useNavigate();
 
@@ -79,8 +77,11 @@ function NewPost() {
     
       .then((res)=>{
         console.log(res)
-        setPk(res.data.pk)
+        navigate(`/post/details/${res.data.pk}`)
     })
+    .catch((error)=>{
+      setPostError(error.message)
+  });
     //window.location.reload(true);
   }
 
@@ -90,6 +91,7 @@ function NewPost() {
       
      <body className="newpostBody">
        <div className="newpostPage">
+       {postError === "Request failed with status code 401" && <div className='alert alert-danger' role = 'alert'>You Can Not Post Anything without Logging In. <Link to={"/login"}>Log In</Link> </div>}
          <form  className="newpost" onSubmit={e => e.preventDefault()}>
             <h1 className="heading"><b>Create new post</b> </h1>
             
@@ -118,7 +120,7 @@ function NewPost() {
             </div>
             
             <div class="bton">
-            <button className="postButton" onClick = {post}><b>Post</b></button>
+            <button className="postButton" onClick = {post}><i className='fa fa-paper-plane' id="iconleft"/><b>Post</b></button>
             </div>
             </form> 
       </div>

@@ -11,15 +11,10 @@
 .Post::after {
   box-sizing: border-box;
 }
-.head{
-    margin: 0 0 30px;
-    padding: 30px;
-    text-align: center;
-    color: black;
-    padding-top: 30px;
-    font-family: var(--font-sans);
-    font-weight: 700;
 
+.postbody{
+  background-color: var(--blue-0);
+  
 }
 
 .Post,
@@ -45,6 +40,7 @@ picture {
 }
 
 .Post{
+  
   display: grid;
   place-items: center;
   min-height: 100vh;
@@ -55,16 +51,12 @@ picture {
   line-height: var(--font-lineheight-3);
 }
 
-:focus {
-  outline: 2px dashed var(--red-7);
-  outline-offset: 0.2em;
-}
 
-.flow > *:where(:not(:first-child)) {
-  margin-top: var(--flow-space, var(--size-3));
-}
+
+
 
 .card {
+  margin-top: 20px;
   min-height: 650px;
   /*width: min(100% - 2rem, 40rem);*/
   width: 700px;
@@ -194,4 +186,32 @@ picture {
 
 .card__cta:hover::after {
   transform: translateX(50%);
+}
+.pnb{
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  padding-bottom: 20px;
+  
+}
+.prebton{
+  padding: 6px 12px;
+  background-color: #fff;
+  border: 1px solid #C5C5C5;
+  border-radius: 2px;
+  color: #0E86D4;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  outline: none;
+}
+.p{
+  padding-right: 10px;
+}
+.n{
+  padding-left: 10px;
+}
+.prebton:hover{
+  background-color: whitesmoke;
 }

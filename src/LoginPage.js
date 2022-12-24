@@ -1,6 +1,6 @@
 import './LoginPage.css';
 
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import axios from 'axios';
 import { useNavigate,Link } from "react-router-dom";
 const Url = "http://127.0.0.1:8000/auth/jwt/create/"
@@ -20,10 +20,15 @@ function LoginPage() {
         .then((response) => {   
             console.log(response.data)
             window.localStorage.setItem('accessToken', response.data.access);
+            navigate('/profile')
         
         })
-        .catch((error) => setIsError(error.message));
-        navigate('/profile')
+        .catch((error) => {
+        if (error.message === "Request failed with status code 401"){
+            alert("Please Input Your Credentials Correctly")}
+        }
+        );
+      
 
     }
     return (

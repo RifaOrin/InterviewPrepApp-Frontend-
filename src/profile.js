@@ -1,29 +1,34 @@
 import './post.css';
 import './profile.css';
 import './newPost.css';
-import cover from './cover.png';
+import Navbar from './navbar';
+
 import {useEffect, useState} from "react";
 import axios from 'axios';
 import { useNavigate, Link } from "react-router-dom";
+
 const Url = "http://127.0.0.1:8000/api/post/newpost/"
 
 function Profile() {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  const [isError, setIsError] = useState("");
   const [author, setAuthor] = useState("");
   const[poster, setPoster] = useState("");
-  const [pk, setPk] = useState();
+  const [image, setImage] = useState("");
+  const [category, setCategory] = useState("");
+  const [isError, setIsError] = useState("");
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [works_at, setWork] = useState("");
   const [gender, setGender] = useState("");
+  const[lives, setLives] = useState("");
+  const[email, setEmail] = useState("");
   const [avatar, setAvatar] = useState();
+  const[coverPhoto, setCoverPhoto] = useState();
   const [myPost, setPostData] = useState([]);
   const[nextUrl, setNextUrl] = useState();
   const[previousUrl, setPreviousUrl] = useState();
-  const [image, setImage] = useState("");
-  const [category, setCategory] = useState("");
+  const[detail, setDetail] = useState("");
   const Access = localStorage.accessToken
 
   const navigate = useNavigate();
@@ -49,8 +54,10 @@ function Profile() {
       .then((response) => {
           console.log(response.data)
           setUsername(response.data.username)
-          setAuthor(response.data.id)
           setPoster(response.data.username)
+          setEmail(response.data.email)
+          setAuthor(response.data.id)
+          
           axios
           .get("http://127.0.0.1:8000/api/user/profile/" + response.data.id + "/")
           .then((res) => {
@@ -58,20 +65,48 @@ function Profile() {
             setWork(res.data.works_at)
             setGender(res.data.gender)
             setAvatar(res.data.avatar)
+            setLives(res.data.lives)
+            setCoverPhoto(res.data.coverPhoto)
           }) 
-
+          .catch((error) =>{
+            setDetail(error.message)
+            console.log(error.message)
+            console.log(detail)
+          } );
           axios
           .get("http://127.0.0.1:8000/api/post/post/?search=" + response.data.username)
           .then((response)=>{
-              console.log(response.data.results)
+              //console.log(response.data.results)
               setPostData(response.data.results)
               setNextUrl(response.data.next)
               setPreviousUrl(response.data.previous)
           })
       })
-      .catch((error) => setIsError(error.message)); 
+      .catch((error) => {
+        let count = 0
+        while (error.message === "Request failed with status code 401"){
+          window.location.reload();
+          count = count + 1
+          if (count === 1) {
+            navigate('/login')
+            break;
+          }
+        }
+      }); 
+
   }, []);
-  
+
+  const PaginationHandler = (url) => {
+    axios
+      .get(url)
+      .then((response) => {
+        setPostData(response.data.results)
+        setNextUrl(response.data.next)
+        setPreviousUrl(response.data.previous)
+      }) 
+      .catch((error) => setIsError(error.message));
+  } 
+
   const  handleImage = (e) => {
     console.log(e.target.files)
     setImage(e.target.files[0])
@@ -106,36 +141,24 @@ const post = (e) =>
     
       .then((res)=>{
         console.log(res)
-        setPk(res.data.pk)
+        window.location.reload();
     })
     //window.location.reload(true);
   }
-
-  const PaginationHandler = (url) => {
-    axios
-      .get(url)
-      .then((response) => {
-        setPostData(response.data.results)
-        setNextUrl(response.data.next)
-        setPreviousUrl(response.data.previous)
-      }) 
-      .catch((error) => setIsError(error.message));
-  } 
    
     function logout(){
         window.localStorage.removeItem("accessToken");
         navigate('/')
-    }
     
+    }
     return (
       <body className='profileBody'>
+        <Navbar/>
       <div className="ProfilePage">
-        <head>
-          
-        </head>
-        {isError == "Request failed with status code 401" && <h2>Please Login or Refresh If Already Logged In</h2>}
+        
+        
         <div className='profile-container'>
-          <img src={cover} alt="cover" className='cover-img'/>
+          <img src={coverPhoto} alt="cover" className='cover-img'/>
           <div className='profile-details'>
             <div className='pd-left'>
               <div className='pd-row'>
@@ -146,7 +169,18 @@ const post = (e) =>
               </div>
               </div>
             </div>
-            <div className='pd-right'></div>
+            <div className='pd-right'>
+                        
+                        {detail === "Request failed with status code 404" && <Link to = '/profile/create'>
+                        
+                                <button className='cfef'><i className='fa fa-edit' id="iconleft"/>Edit Profile</button>
+                        </Link>}
+                        {detail !== "Request failed with status code 404" && <Link to = '/profile/edit'>
+                           <button className='cfef'><i className='fa fa-edit' id="iconleft"/>Update Profile</button>
+                        </Link>}   
+                            
+                        
+            </div>
           </div>
            
            <div className='profile-info'>
@@ -155,10 +189,10 @@ const post = (e) =>
                   <h3 className='about'>About</h3>
                   <hr></hr>
                   <ul>
-                    <li>Works at {works_at}</li>
-                    <li>Lives in Dhaka, Bangladesh</li>
-                    <li>{gender}</li>
-                    <li>email - zisan321@gmail.com</li>
+                    <li><i className="fa fa-briefcase" id="iconleft"/>Works at <b>{works_at}</b></li>
+                    <li><i className="fa fa-map-marker" id="iconleft"/> From <b>{lives}</b> </li>
+                    <li><i className="fa fa-venus-mars" id="iconleft"/>{gender}</li>
+                    <li><i className="fa fa-envelope" id="iconleft"/> {email}</li>
                   </ul>
                 </div>
              </div>
@@ -191,7 +225,7 @@ const post = (e) =>
             </div>
             
             <div class="bton">
-            <button className="postButton" onClick = {post}><b>Post</b></button>
+            <button className="postButton" onClick = {post}><i className='fa fa-paper-plane' id="iconleft"/><b>Post</b></button>
             </div>
             </form>
             {/*  */}
@@ -213,8 +247,7 @@ const post = (e) =>
                     Posted On - {date}
                   </p>
                   <p class="card__date">
-                    <Link ></Link>
-                    Posted By - {author_name}
+                  Posted By - <Link to = {'/profile/user/'+ author + "/" + author_name}>{author_name}</Link>
                   </p>
                   <p class="card__date">Likes - {bump}</p>
                   <Link class="card__cta" to = {'/post/details/' + pk}>Read more</Link>
@@ -224,19 +257,17 @@ const post = (e) =>
              </div>
            </div>
         </div>
-    
-        Haven't Created Your Profile? -
-        <Link to = '/profile/edit'>Create Profile</Link>
+        <div className='pnb'>
         
-        
-        
-
         {previousUrl &&
-        <button onClick={()=>PaginationHandler(previousUrl)}>Previous</button>}
+        <button className='prebton' onClick={()=>PaginationHandler(previousUrl)}><span className="p" aria-hidden="true">&laquo;</span>Previous</button>}
         {nextUrl &&
-        <button onClick={()=>PaginationHandler(nextUrl)}>Next</button>}
-        <button onClick = {logout} >Log Out</button>
+        <button className='prebton' onClick={()=>PaginationHandler(nextUrl)}>Next<span className="n" aria-hidden="true">&raquo;</span></button>}
+        </div>
         
+        
+        
+	      
       </div>
       </body> 
     );

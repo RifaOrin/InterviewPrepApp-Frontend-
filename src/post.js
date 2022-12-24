@@ -1,16 +1,16 @@
 import './post.css';
 import {useEffect, useState} from "react";
 import axios from 'axios';
-import { useNavigate,Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NewPost from "./newPost";
+import Navbar from './navbar';
 
 function Post() {
-    const baseUrl = "http://127.0.0.1:8000/api/post/post/"
+    const baseUrl = "http://127.0.0.1:8000/api/post/post/?ordering=-date"
     const [myPost, setPostData] = useState([]);
     const [isError, setIsError] = useState("");
     const[nextUrl, setNextUrl] = useState();
     const[previousUrl, setPreviousUrl] = useState();
-    const navigate = useNavigate();
     
     useEffect(() => {
         axios
@@ -38,17 +38,13 @@ function Post() {
     return (
       
         <body className="postbody">
+          <Navbar/>
          <NewPost/> 
         <div className="Post">
-        <h1 className='head'>Our Latest Posts</h1>
-        {isError !== "" && <h2>{isError}</h2>}
-        <Link to="/post/filter/ordering=date">Date - Ascending</Link>
-        <Link to="/post/filter/ordering=-date">Date - Descending</Link>
-        <Link to="/post/filter/ordering=bump">Bump - Ascending</Link>
-        <Link to="/post/filter/ordering=-bump">Bump - Descending</Link>
-        <Link to="/post/filter/category=entertainment">Entertainment</Link>
-        <Link to="/post/filter/category=questions">Questions</Link>
-        <Link to="/post/filter/category=experiences">Experiences</Link>
+        
+        {isError === "Request failed with status code 401" && <div className='alert alert-danger' role = 'alert'>You Can Not See Any Post Before Logging In. <Link to={"/login"}>Log In</Link> </div>}
+       
+       
         {myPost.map((feed) => {
             const {title, date, author_name, pk, category, cover, author,bump} = feed;
         
@@ -67,8 +63,8 @@ function Post() {
                     Posted On - {date}
                   </p>
                   <p class="card__date">
-                    <Link ></Link>
-                    Posted By - {author_name}
+                    
+                    Posted By - <Link to = {'/profile/user/'+ author + "/" + author_name}>{author_name}</Link>
                   </p>
                   <p class="card__date">Likes - {bump}</p>
                   <Link class="card__cta" to = {'/post/details/' + pk}>Read more</Link>
@@ -76,10 +72,14 @@ function Post() {
             )
         
         })}
+        
+        </div>
+        <div className='pnb'>
+        
         {previousUrl &&
-        <button onClick={()=>PaginationHandler(previousUrl)}>Previous</button>}
+        <button className='prebton' onClick={()=>PaginationHandler(previousUrl)}><span className="p" aria-hidden="true">&laquo;</span>Previous</button>}
         {nextUrl &&
-        <button onClick={()=>PaginationHandler(nextUrl)}>Next</button>}
+        <button className='prebton' onClick={()=>PaginationHandler(nextUrl)}>Next<span className="n" aria-hidden="true">&raquo;</span></button>}
         </div>
         </body>
       

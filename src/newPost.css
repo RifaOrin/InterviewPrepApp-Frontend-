@@ -6,7 +6,7 @@
 .newpostPage{
     display: grid;
   place-items: center;
-  min-height: 100vh;
+  min-height: 70vh;
   background-color: var(--blue-0);
 
   font-family: var(--font-sans);
@@ -18,7 +18,7 @@
     min-height: 477px;
     /*width: min(100% - 2rem, 40rem);*/
     width: 700px;
-   margin-bottom: 20px;
+   
    background-color: var(--gray-0);
    box-shadow: var(--shadow-2);
    border-radius: var(--radius-2);
@@ -44,12 +44,12 @@
     padding: 0 40px;
     box-sizing: border-box;
 }
-#exampleFormControlInput1{
+.newposti #exampleFormControlInput1{
     margin-top: 20px;
     margin-bottom: 20px;
     
 }
-#exampleFormControlTextarea1{
+.newposti #exampleFormControlTextarea1{
     margin-bottom: 20px;
 }
 /*.input-box{
@@ -60,7 +60,6 @@
     border: 1px solid #999;
     outline:none;
 }
-
 /*.input-box-text{
     border-radius: 20px;
     padding: 10px;
@@ -88,7 +87,6 @@ form .posttext_field{
     border: none;
     background: none;
     outline: none;
-
 }
 .posttext_field input{
     width:100%;
@@ -135,7 +133,6 @@ form .posttext_field{
 .postTitle_field input:valid ~ label{
     top: -5px;
     color: #2691d9;
-
 }
 .postTitle_field input:focus ~ span::before,
 .postTitle_field input:valid ~ span::before{
@@ -156,7 +153,6 @@ form .posttext_field{
 .posttext_field input:valid ~ label{
     top: -5px;
     color: #2691d9;
-
 }
 .posttext_field input:focus ~ span::before,
 .posttext_field input:valid ~ span::before{
@@ -182,7 +178,7 @@ form .posttext_field{
 .category_label{
     margin-right: 10px;
 }
-.postButton {
+/*.postButton {
     margin:30px 0;
     width:100px;
     height: 40px;
@@ -208,9 +204,29 @@ form .posttext_field{
     color: white;
     transition: .5s;
     
+}*/
+.postButton{
+    margin:30px 0;
+    width:90px;
+    height: 40px;
+    background-color: #196cbb;
+    color: white;
+    border: 2px solid #0828d8;
+    border-radius: 5px;
+    padding: 5px 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    
+    transition-duration: 0.4s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    left: 533px;
+    bottom: 21px;
 }
-  
-  
-
-
-  
+.postButton:hover {
+  background-color: #0828d8;
+  color: white;
+}

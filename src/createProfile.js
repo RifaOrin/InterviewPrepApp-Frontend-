@@ -1,10 +1,10 @@
-import './editProfile.css';
+import './createProfile.css';
 import {useEffect, useState} from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 const Url = "http://127.0.0.1:8000/api/user/profile/"
 const user = "http://127.0.0.1:8000/auth/users/me/"
-function EditProfile(){
+function CreateProfile(){
     const[name, setName] = useState("");
     const[work, setWork] = useState("");
     const [author, setAuthor] = useState("");
@@ -40,15 +40,12 @@ function EditProfile(){
       setProfileImage(e.target.files[0])
     }
     const handleCoverPhoto = (e) => {
-        console.log(e.target.files)
-        setCoverPhoto(e.target.files[0])
+      console.log(e.target.files)
+      setCoverPhoto(e.target.files[0])
     }
-    
-    const edit = (e) => {
+    const create = (e) => {
         e.preventDefault();
-        
         const formdata = new FormData();
-        
         formdata.append('parent', author)
         formdata.append('name', name)
         formdata.append('works_at', work)
@@ -57,47 +54,51 @@ function EditProfile(){
         formdata.append('avatar', profileImage)
         formdata.append('coverPhoto', coverPhoto)
         axios({
-            method : "put",
-            url : Url + author + '/',
+            method : "post",
+            url : Url,
             data : formdata,
             headers: { "Content-Type": "multipart/form-data", Authorization: `JWT ${Access}`},
         })
         .then((response) => {   
             console.log(response.data)
             navigate('/profile')
-        
         })
         .catch((error) => setIsError(error.message));
         //navigate('/profile')
     }
     return(
-        <body className='editBody'>
-        <div className = "EditProfile">
-            <h1 className='edit'>Edit Profile</h1>
-            <form className='editForm'>
+      <body className='createBody'>
+        <div className = "CreateProfile">
+            <h1 className="create">Create Profile</h1>
+            <form className='createForm'>
             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Name" onChange={(e)=>setName(e.target.value)} required/>
             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Workplace" onChange={(e)=>setWork(e.target.value)} required/>
             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lives in (city, country)" onChange={(e)=>setLives(e.target.value)} required/>
-            <label className='lbl'>Gender : </label>
+            
+                 <label className='lbl'>Gender : </label>
                  <select name="gender" className='gndr' onChange={(e)=>setGender(e.target.value)}>
                   <option className='opt' value="Male" selected>Male</option>
                   <option className='opt' value="Female">Female</option>
                   <option className='opt' value="Other">Other</option>
                 </select>
+                
+            
+            
             </form>
-            <form className='editFrm'>
-            <div className='prof'>
-            <label for="formFile" class="form-label">Change Profile Picture: </label>
+            <form className='createFrm'>
+            <div className='profil'>
+            <label for="formFile" class="form-label">Upload Profile Picture: </label>
             <input class="form-control" type="file" id="formFile" accept = "image/*" onChange={handleProfileImage}/>
             </div>
-            <div className='cov'>
-            <label for="formFile" class="form-label">Change Cover Photo: </label>
+            <div className='covr'>
+            <label for="formFile" class="form-label">Upload Cover Photo: </label>
             <input class="form-control" type="file" id="formFile" accept = "image/*" onChange={handleCoverPhoto}/>
             </div>
             </form>
-            <button className="editbtn" onClick={edit}><b>Edit Profile</b></button>
+            
+            <button className="createbtn" onClick={create}>Create Profile</button>
         </div>
         </body>
     );
 }
-export default EditProfile;
+export default CreateProfile;
