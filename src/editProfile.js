@@ -1,3 +1,4 @@
+import './editProfile.css';
 import {useEffect, useState} from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
@@ -8,6 +9,7 @@ function EditProfile(){
     const[work, setWork] = useState("");
     const [author, setAuthor] = useState("");
     const[gender, setGender] = useState("");
+    const[lives, setLives] = useState("");
     const [isError, setIsError] = useState("");
     const[profileImage, setProfileImage] = useState("");
     const[coverPhoto, setCoverPhoto] = useState("");
@@ -51,6 +53,7 @@ function EditProfile(){
         formdata.append('name', name)
         formdata.append('works_at', work)
         formdata.append('gender', gender)
+        formdata.append('lives', lives)
         formdata.append('avatar', profileImage)
         formdata.append('coverPhoto', coverPhoto)
         axios({
@@ -61,24 +64,40 @@ function EditProfile(){
         })
         .then((response) => {   
             console.log(response.data)
+            navigate('/profile')
         
         })
         .catch((error) => setIsError(error.message));
         //navigate('/profile')
     }
     return(
+        <body className='editBody'>
         <div className = "EditProfile">
-            <h1>Edit Profile</h1>
-            <label>Name</label>
-            <input type="text"  onChange={(e)=>setName(e.target.value)} required/>
-            <label>Works at:</label>
-            <input type="text"  onChange={(e)=>setWork(e.target.value)} required/>
-            <label ><b>Change Profile Picture: </b></label>
-                <input type="file" name="image" accept = "image/*" onChange={handleProfileImage}/>
-            <label ><b>Change Cover Photo: </b></label>
-                <input type="file" name="image" accept = "image/*" onChange={handleCoverPhoto}/>
-            <button onClick={edit}>Edit Profile</button>
+            <h1 className='edit'>Edit Profile</h1>
+            <form className='editForm'>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Name" onChange={(e)=>setName(e.target.value)} required/>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Workplace" onChange={(e)=>setWork(e.target.value)} required/>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lives in (city, country)" onChange={(e)=>setLives(e.target.value)} required/>
+            <label className='lbl'>Gender : </label>
+                 <select name="gender" className='gndr' onChange={(e)=>setGender(e.target.value)}>
+                  <option className='opt' value="Male" selected>Male</option>
+                  <option className='opt' value="Female">Female</option>
+                  <option className='opt' value="Other">Other</option>
+                </select>
+            </form>
+            <form className='editFrm'>
+            <div className='prof'>
+            <label for="formFile" class="form-label">Change Profile Picture: </label>
+            <input class="form-control" type="file" id="formFile" accept = "image/*" onChange={handleProfileImage}/>
+            </div>
+            <div className='cov'>
+            <label for="formFile" class="form-label">Change Cover Photo: </label>
+            <input class="form-control" type="file" id="formFile" accept = "image/*" onChange={handleCoverPhoto}/>
+            </div>
+            </form>
+            <button className="editbtn" onClick={edit}><b>Edit Profile</b></button>
         </div>
+        </body>
     );
 }
 export default EditProfile;

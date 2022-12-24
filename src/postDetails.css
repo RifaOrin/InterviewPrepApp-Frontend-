@@ -159,7 +159,11 @@
    max-width: 100%;
    display: block;
 }
-#formFile{
+.addcard .form-control{
+    width: 797px;
+    margin-left:100px;
+}
+.cmntimg .form-control{
     width: 797px;
     margin-left:100px;
 }
@@ -167,7 +171,14 @@
     width: 797px;
     margin-left:100px;
 }
-.form-label{
+.addcard .form-label{
+    margin-left:100px;
+    margin-top:30px;
+    font-family: var(--font-sans);
+    color: black;
+    font-weight: 700;
+}
+.cmntimg .form-label{
     margin-left:100px;
     margin-top:30px;
     font-family: var(--font-sans);

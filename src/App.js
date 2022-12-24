@@ -13,6 +13,7 @@ import People from './people';
 import FilterPost from './filterpost';
 import Navbar from './navbar';
 import About from './about';
+import EditPost from './editPost';
 
 import {
   BrowserRouter as Router,
@@ -33,6 +34,9 @@ function App() {
         </Routes>
         <Routes>
           <Route path="/post" element={<Post/>}></Route>
+        </Routes>
+        <Routes>
+          <Route path="/post/edit/:post_id" element={<EditPost/>}></Route>
         </Routes>
         <Routes>
           <Route path="/post/filter/:criteria" element={<FilterPost/>}></Route>
@@ -59,7 +63,7 @@ function App() {
           <Route path="/profile/edit" element={<EditProfile/>}></Route>
         </Routes>
         <Routes>
-          <Route path="/profile/user/:profile_id" element={<People/>}></Route>
+          <Route path="/profile/user/:profile_id/:username" element={<People/>}></Route>
         </Routes>
         <Routes>
           <Route path="/navbar" element={<Navbar/>}></Route>

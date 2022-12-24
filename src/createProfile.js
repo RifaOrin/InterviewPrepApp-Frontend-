@@ -1,3 +1,4 @@
+import './createProfile.css';
 import {useEffect, useState} from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
@@ -60,32 +61,44 @@ function CreateProfile(){
         })
         .then((response) => {   
             console.log(response.data)
-        
+            navigate('/profile')
         })
         .catch((error) => setIsError(error.message));
         //navigate('/profile')
     }
     return(
-        <div className = "EditProfile">
-            <h1>Edit Profile</h1>
-            <label>Name</label>
-            <input type="text" onChange={(e)=>setName(e.target.value)} required/>
-            <label>Works at:</label>
-            <input type="text" onChange={(e)=>setWork(e.target.value)} required/>
-            <label>Lives in:</label>
-            <input type="text" onChange={(e)=>setLives(e.target.value)} required/>
-            <label>Gender:</label>
-            <select name="gender" onChange={(e)=>setGender(e.target.value)}>
-              <option value="Male" selected>Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
-            <label ><b>Profile Picture: </b></label>
-                <input type="file" name="image" accept = "image/*" onChange={handleProfileImage}/>
-            <label ><b>Cover Photo: </b></label>
-                <input type="file" name="image" accept = "image/*" onChange={handleCoverPhoto}/>
-            <button onClick={create}>Create Profile</button>
+      <body className='createBody'>
+        <div className = "CreateProfile">
+            <h1 className="create">Create Profile</h1>
+            <form className='createForm'>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Name" onChange={(e)=>setName(e.target.value)} required/>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Workplace" onChange={(e)=>setWork(e.target.value)} required/>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lives in (city, country)" onChange={(e)=>setLives(e.target.value)} required/>
+            
+                 <label className='lbl'>Gender : </label>
+                 <select name="gender" className='gndr' onChange={(e)=>setGender(e.target.value)}>
+                  <option className='opt' value="Male" selected>Male</option>
+                  <option className='opt' value="Female">Female</option>
+                  <option className='opt' value="Other">Other</option>
+                </select>
+                
+            
+            
+            </form>
+            <form className='createFrm'>
+            <div className='profil'>
+            <label for="formFile" class="form-label">Upload Profile Picture: </label>
+            <input class="form-control" type="file" id="formFile" accept = "image/*" onChange={handleProfileImage}/>
+            </div>
+            <div className='covr'>
+            <label for="formFile" class="form-label">Upload Cover Photo: </label>
+            <input class="form-control" type="file" id="formFile" accept = "image/*" onChange={handleCoverPhoto}/>
+            </div>
+            </form>
+            
+            <button className="createbtn" onClick={create}>Create Profile</button>
         </div>
+        </body>
     );
 }
 export default CreateProfile;

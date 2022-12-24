@@ -1,7 +1,10 @@
+import './navbar.css';
 import {useEffect, useState} from "react";
 import axios from 'axios';
 import { useNavigate, Link } from "react-router-dom";
+
 function Navbar(){
+    
     const [username, setUsername] = useState("");
     const [isError, setIsError] = useState("");
     const navigate = useNavigate();
@@ -35,20 +38,52 @@ function Navbar(){
 
     return(
 
-        <>
-        <Link to = "/">Home</Link>
-        <Link to = "about">About</Link>
-        <Link to = "/post">Post</Link>
-        <Link to="/post/filter/category=entertainment">Entertainment</Link>
-        <Link to="/post/filter/category=questions">Questions</Link>
-        <Link to="/post/filter/category=experiences">Experiences</Link>
-        <Link to="/post/filter/ordering=date">Date - Ascending</Link>
-        <Link to="/post/filter/ordering=-date">Date - Descending</Link>
-        <Link to="/post/filter/ordering=bump">Bump - Ascending</Link>
-        <Link to="/post/filter/ordering=-bump">Bump - Descending</Link>
-        <Link to="/profile">{username}</Link>
-        <button onClick = {logout} >Log Out</button>
-        </>
+        <body className='navbarBody'>
+        <header className='hd'>
+        <div className="navbar">
+          <h1 className='lgo'>Zar<span>Code</span></h1>
+            <ul>
+            
+            <li><a href='/'><i class="fa fa-home" id="iconleft" />Home</a></li>
+            
+            <li><a href = "about"><i class="fa fa-info-circle" id="iconleft" />About</a></li>
+            <li><a href = "/post"><i class="fa fa-newspaper" id="iconleft"/>Feed</a></li>
+            <li>
+              <a href = "#">Category <i class="fa fa-caret-down"/></a>
+              <div class="dropdown-menu">
+                      <ul>
+                        <li><a href="/post/filter/category=entertainment">Entertainment</a></li>
+                        <li><a href="/post/filter/category=questions">Question</a></li>
+                        <li><a href="/post/filter/category=experiences">Experience</a></li>
+                      </ul>
+              </div>
+              </li>
+            <li>
+              <a href = "#">Sort by <i class="fa fa-caret-down"/></a>
+              <div class="dropdown-menu">
+                      <ul>
+                        <li><a href="/post/filter/ordering=bump">Bump<i class="fa fa-angle-double-up" id="iconright"/></a></li>
+                        <li><a href="/post/filter/ordering=-bump">Bump<i class="fa fa-angle-double-down" id="iconright"/></a></li>
+                        <li><a href="/post/filter/ordering=date">Date<i class="fa fa-angle-double-up" id="iconright"/></a></li>
+                        <li><a href="/post/filter/ordering=-date">Date<i class="fa fa-angle-double-down" id="iconright"/></a></li>
+                      </ul>
+              </div>
+              </li>
+            
+           {localStorage.accessToken != null && <li><a href ="/profile"><i class="fa fa-user-circle" id="iconleft" />{username}</a></li>}
+           {localStorage.accessToken != null && <li><button className='navbton' onClick = {logout} ><i class="fa fa-power-off" id="iconleft"/> Log Out</button></li>}
+          </ul>
+          
+          </div>
+          
+          </header>
+          
+          
+          
+          
+          
+             
+    </body>
     )
 }
 export default Navbar;

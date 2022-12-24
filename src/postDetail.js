@@ -1,5 +1,6 @@
 import './postDetails.css'
-import { Link, useParams } from "react-router-dom";
+
+import { Link, useParams, useNavigate } from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from 'axios';
 const baseUrl = "http://127.0.0.1:8000/api/post/post/"
@@ -14,7 +15,6 @@ function PostDetailPage() {
     const [date, setDate] = useState("");
     const [author, setAuthor] = useState("");
     const [bump, setBump] = useState("");
-    const [isError, setIsError] = useState("");
     const[authorName, setAuthorName] = useState("");
 
     //                                                                             Comment
@@ -22,13 +22,20 @@ function PostDetailPage() {
     const[commentTitle, setCommentTitle] = useState("");
     const[commentAuthor, setCommentAuthor] = useState("");
     const[commentAuthorName, setCommentAuthorName] = useState("");
-    const[commentImage, setCommentImage] = useState();
+    const[commentImage, setCommentImage] = useState("");
     
 
     //                                                                              Image
     const[image, setImage]= useState([]);
     const[coverImage, setCoverImage] = useState([]);
     const[postImage, setPostImage] = useState([]);
+    //                                                                          Error Handling
+    const [isError, setIsError] = useState("");
+    const[commentError, setCommentError] = useState("");
+    const[commentPostError, setCommentPostError] = useState("");
+    const[bumpError, setBumpError] = useState("");
+
+    const navigate = useNavigate();
     useEffect(() => {
 
       //                                                     AUTHOR that is CURRENTLY LOGGED IN and about to comment (INTERCEPTOR AND .GET)                        
@@ -84,7 +91,7 @@ function PostDetailPage() {
               
               
             })
-          .catch((error) => setIsError(error.message));
+          .catch((error) =>setCommentError(error.message));
           //                                                                    Getting Images of Current Post
 
           axios
@@ -102,10 +109,10 @@ function PostDetailPage() {
 
     //                                                                      POSTING COMMENT WITH HEADER (.POST)
 
-    /*const handleCommentImage = (e) => {
+    const handleCommentImage = (e) => {
       console.log(e.target.files)
       setCommentImage(e.target.files[0])
-    }*/
+    }
 
     const commentHandler = (e) => {
       e.preventDefault();
@@ -124,7 +131,7 @@ function PostDetailPage() {
       const formdata = new FormData();
       formdata.append('text', commentTitle)
       formdata.append('author', commentAuthor)
-      //formdata.append('image', commentImage)
+      formdata.append('image', commentImage)
       formdata.append('author_name', commentAuthorName)
       axios({
         method: "post",
@@ -134,9 +141,10 @@ function PostDetailPage() {
       })
       .then(res => {
         console.log(res.data)
+        window.location.reload();
         
       })
-      .catch((error) => setIsError(error.message));
+      .catch((error) => alert("You're not logged in!"));
       //window.location.reload();
     }
 
@@ -153,7 +161,7 @@ function PostDetailPage() {
       .then(res => {
         console.log(res.data.bump)
       })
-      .catch((error) => setIsError(error.message));
+      .catch((error) => setBumpError(error.message));
       window.location.reload();
     }
 
@@ -164,6 +172,8 @@ function PostDetailPage() {
         setPostImage(e.target.files[0])
     }
 
+    
+
     const imagehandle = (e) => {
       e.preventDefault();
       const formdata = new FormData()
@@ -171,8 +181,6 @@ function PostDetailPage() {
       formdata.append('parent', post_id)
       const post = baseUrl + post_id + '/postImage/'
       
-      
-   
     axios({
       method: "post",
       url: post,
@@ -182,18 +190,44 @@ function PostDetailPage() {
     
       .then((res)=>{
         console.log(res)
+        window.location.reload();
     })
     //window.location.reload();
     };
 
+    const deletePost = (e) => {
+      e.preventDefault();
+      axios
+      .delete(baseUrl + post_id + '/')
+      .then(() => {
+        alert("post deleted")
+      })
+    }
+
+    const deleteComment = (e) => {
+      e.preventDefault();
+      axios
+      .delete(baseUrl + post_id + '/comment/')
+      .then(() => {
+        alert("comment deleted")
+      })
+    }
+
+    const editPost = (e) => {
+      e.preventDefault();
+      navigate(`/post/edit/${post_id}`)
+    }
+
    
     return (
         
-            
+            <body className='detailBody'>
+              
                 <div className="PostDetailPage">
+                {isError === "Request failed with status code 401" && <div className='alert alert-danger' role = 'alert'>You are not Logged in. <Link to={"/login"}>Log In</Link> </div>}
                 <h1 className = "details"> POST DETAILS</h1>
                 <div className = "detailsCard">
-                  {isError !== "" && <h2>{isError}</h2>}
+                  
                   <div className = "grid-c">
                     <div className="grid-items1"><h1 className="titl">{title}</h1></div>
                     <div className="grid-items2"><img className = "cardImg" src={coverImage}/>
@@ -205,31 +239,36 @@ function PostDetailPage() {
                   </div>
                   <div className="idn">
                   <p>Posted on - {date}</p>
-                  <p>Posted by - <Link className="pro" to = {'/profile/user/' + author}>{authorName}</Link></p>
+                  {commentAuthorName !== authorName &&
+                  <p>Posted by - <Link className="pro" to = {'/profile/user/' + author + '/' + authorName}>{authorName}</Link></p>}
+                  {commentAuthorName === authorName && <p>Posted by - <Link className="pro" to = {'/profile/'}>{authorName}</Link></p>}
                   <p>Likes - {bump}</p>
                   
                   </div>
                   <div className='b'>
-                  <button className="like" onClick = {bumpHandler}>Like</button>
-                  <button className="editPost">Edit Post</button>
-                  <button className="deletePost">Delete Post</button>
+                  <button className="like" onClick = {bumpHandler}><i className="fa fa-thumbs-up" id="iconleft"/>Like</button>
+                  {commentAuthorName === authorName && 
+                  <button className="editPost" onClick = {editPost}><i className='fa fa-edit' id="iconleft"/>Edit</button>
+                  }
+                   {commentAuthorName === authorName &&
+                  <button className="deletePost" onClick={deletePost}><i className='fa fa-trash' id="iconleft"/>Delete</button>}
                   </div>
                   
                 </div>
 
 
 
-                <div className='addcard'>
+                {commentAuthorName === authorName && <div className='addcard'>
                 {
                 /*<label ><b>Add More Images: </b></label>
                 <input  type="file" name="image" accept = "image/*" onChange={handleImage}/>*/}
                 
                   <label for="formFile" class="form-label">Add more images</label>
-                  <input class="form-control" type="file" id="formFile"/>
+                  <input class="form-control" type="file" id="formFile" accept = "image/*" onChange={handleImage}/>
                   
-                <button className='bi' onClick = {imagehandle}><b>Upload Image</b></button>
+                <button className='bi' onClick = {imagehandle}><i className='fa fa-upload' id="iconleft"/><b>Upload Image</b></button>
                 
-                </div>
+                </div>}
                 <h1 className="more" >More Images</h1>
                 {image.map((images) => {
                       const {image} = images;
@@ -255,13 +294,13 @@ function PostDetailPage() {
                 
                 <div className='cmntimg'>
                   <label for="formFile" class="form-label">Comment image:</label>
-                  <input class="form-control" type="file" id="formFile"/>
+                  <input class="form-control" type="file" id="formFile" accept = "image/*" onChange={handleCommentImage}/>
 
                   
                   {/*<label><b>Comment Image: </b></label>
                   <input type="file" name="image" accept = "image/*"  /> {/*onChange={handleCommentImage}*/}
                 </div>
-                <button className="cmntbton" onClick = {commentHandler}><b>Comment</b></button>
+                <button className="cmntbton" onClick = {commentHandler}><i className="fa fa-paper-plane" id="iconleft"/><b>Comment</b></button>
                 </div>
 
                 
@@ -281,6 +320,7 @@ function PostDetailPage() {
         
         })}
                 </div>
+                </body>
            
         
       
