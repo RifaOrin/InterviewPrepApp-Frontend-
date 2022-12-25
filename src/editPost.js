@@ -1,4 +1,4 @@
-import './newPost.css';
+import './css/newPost.css';
 import {useEffect, useState} from "react";
 import axios from 'axios';
 import { useNavigate, Link, useParams } from "react-router-dom";
@@ -74,6 +74,7 @@ function EditPost(){
       
         .then((res)=>{
           console.log(res)
+          navigate(`/post/details/${post_id}`)
       })
       .catch((error)=>{
           setPostError(error.message)
@@ -107,9 +108,9 @@ function EditPost(){
               <div class="postCategory_field">
               <label class="category_label" for="category"><b>Category </b></label>
                 <select name="category" onChange={(e)=>setCategory(e.target.value)}>
-                  <option value="questions"  >Questions</option>
-                  <option value="entertainment"  >Entertainment</option>
-                  <option value="experiences"  >Experiences</option>
+                  <option value="questions">Questions</option>
+                  <option value="entertainment">Entertainment</option>
+                  <option value="experiences">Experiences</option>
                 </select>
               </div>
               

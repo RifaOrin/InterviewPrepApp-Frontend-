@@ -1,4 +1,4 @@
-import './navbar.css';
+import './css/navbar.css';
 import {useEffect, useState} from "react";
 import axios from 'axios';
 import { useNavigate, Link } from "react-router-dom";

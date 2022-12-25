@@ -1,4 +1,4 @@
-import './about.css';
+import './css/about.css';
 import {Link} from 'react-router-dom';
 
 function About(){

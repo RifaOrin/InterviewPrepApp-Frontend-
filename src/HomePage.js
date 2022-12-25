@@ -1,4 +1,4 @@
-import './HomePage.css';
+import './css/HomePage.css';
 import About from "./about";
 function HomePage() {
     return (
@@ -14,12 +14,9 @@ function HomePage() {
            </ul>
         </div>
 
-        <div className='bigger'>
+        {/*<div className='bigger'>
           <div className='big'>
           <h1 className='bigtitle'>A New Platform to Prepare</h1>
-          
-          </div>
-          </div>
           <div className='cntnt'>
             
           <div className='small'>
@@ -27,6 +24,26 @@ function HomePage() {
           </div>
           <div className='lft'></div>
           </div>
+          </div>
+          </div>*/}
+          <div className='x'>
+          <section className='homei'>
+                <div className='contenti'>
+                    
+                    <div className='txtii'>
+                        <h1>A New Platform to Prepare</h1>
+                        <p>ZarCode is the all-in-one platform to know about Interview Information. Users can post about their interview experiences, gain knowledge about interview procedures of top tech companies, ask their questions and have discussions on trending tech topics.</p>
+                    </div>
+                    <div className='leftii'></div>        
+                  </div>        
+                            
+                        
+                        
+                    
+                
+            </section>
+            </div>
+          
           <div id="gi">
           <About/>
           </div>

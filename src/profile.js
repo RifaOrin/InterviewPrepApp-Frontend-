@@ -1,6 +1,6 @@
-import './post.css';
-import './profile.css';
-import './newPost.css';
+import './css/post.css';
+import './css/profile.css';
+import './css/newPost.css';
 import Navbar from './navbar';
 
 import {useEffect, useState} from "react";
@@ -158,11 +158,11 @@ const post = (e) =>
         
         
         <div className='profile-container'>
-          <img src={coverPhoto} alt="cover" className='cover-img'/>
+        <a href={coverPhoto} target="_blank"><img src={coverPhoto} alt="cover" className='cover-img'/></a>
           <div className='profile-details'>
             <div className='pd-left'>
               <div className='pd-row'>
-              <img src = {avatar} className='pd-img'/>
+              <a href={avatar} target="_blank"><img src = {avatar} className='pd-img'/></a>
               <div>
                 <h3 className='pd-name'>{name}</h3>
                 <p className='pd-username'>@{username}</p>
@@ -173,7 +173,7 @@ const post = (e) =>
                         
                         {detail === "Request failed with status code 404" && <Link to = '/profile/create'>
                         
-                                <button className='cfef'><i className='fa fa-edit' id="iconleft"/>Edit Profile</button>
+                                <button className='cfef'><i className='fa fa-edit' id="iconleft"/>Create Profile</button>
                         </Link>}
                         {detail !== "Request failed with status code 404" && <Link to = '/profile/edit'>
                            <button className='cfef'><i className='fa fa-edit' id="iconleft"/>Update Profile</button>

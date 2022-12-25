@@ -1,4 +1,4 @@
-import "./activate.css";
+import "./css/activate.css";
 import { Link} from 'react-router-dom';
 function Activate() {
     return(

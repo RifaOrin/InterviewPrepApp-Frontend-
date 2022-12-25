@@ -1,4 +1,4 @@
-import './LoginPage.css';
+import './css/LoginPage.css';
 
 import {useState} from "react";
 import axios from 'axios';

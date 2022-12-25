@@ -1,4 +1,4 @@
-import './signUp.css';
+import './css/signUp.css';
 
 import {useEffect, useState} from "react";
 import axios from 'axios';

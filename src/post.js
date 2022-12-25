@@ -1,4 +1,4 @@
-import './post.css';
+import './css/post.css';
 import {useEffect, useState} from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import NewPost from "./newPost";
 import Navbar from './navbar';
 
 function Post() {
-    const baseUrl = "http://127.0.0.1:8000/api/post/post/?ordering=-date"
+    const baseUrl = "http://127.0.0.1:8000/api/post/post/"
     const [myPost, setPostData] = useState([]);
     const [isError, setIsError] = useState("");
     const[nextUrl, setNextUrl] = useState();
@@ -46,7 +46,7 @@ function Post() {
        
        
         {myPost.map((feed) => {
-            const {title, date, author_name, pk, category, cover, author,bump} = feed;
+            const {title, date, author_name, pk, category, cover, author, bump} = feed;
         
           return(
                 <div className="card">

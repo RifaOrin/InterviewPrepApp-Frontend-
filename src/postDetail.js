@@ -1,5 +1,5 @@
-import './postDetails.css'
-
+import './css/postDetails.css'
+import Navbar from './navbar';
 import { Link, useParams, useNavigate } from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from 'axios';
@@ -201,6 +201,7 @@ function PostDetailPage() {
       .delete(baseUrl + post_id + '/')
       .then(() => {
         alert("post deleted")
+        navigate('/post')
       })
     }
 
@@ -222,7 +223,7 @@ function PostDetailPage() {
     return (
         
             <body className='detailBody'>
-              
+                <Navbar/>
                 <div className="PostDetailPage">
                 {isError === "Request failed with status code 401" && <div className='alert alert-danger' role = 'alert'>You are not Logged in. <Link to={"/login"}>Log In</Link> </div>}
                 <h1 className = "details"> POST DETAILS</h1>
@@ -230,7 +231,8 @@ function PostDetailPage() {
                   
                   <div className = "grid-c">
                     <div className="grid-items1"><h1 className="titl">{title}</h1></div>
-                    <div className="grid-items2"><img className = "cardImg" src={coverImage}/>
+                    <div className="grid-items2">
+                      <a target="_blank" href = {coverImage}><img className = "cardImg" src={coverImage}/></a>
                     </div>
                     
                   </div>
@@ -275,7 +277,7 @@ function PostDetailPage() {
                       return(
                         <div className='icard'>
                         <div className = "image">
-                          <img className='ci' src={image} />
+                          <a target="_blank"  href ={image}><img className='ci' src={image} /></a>
                           
                         
                           </div>
@@ -308,13 +310,20 @@ function PostDetailPage() {
                 {commentData.map((comments) => {
                 const {text} = comments;
                 const {author_name} = comments;
-                //const{image} = comments;
+                const{image} = comments;
                 return(
                 <div className="Comment">
                     
                     <p className='cmnttxt'>{text}</p>
                     <p className='authortxt'> - {author_name} </p>
-                    {/*<img src = {image} />*/}
+                    { image != null &&<div className='cmntimgiiicard'>
+                     <div className = "imagei">
+                         <a target="_blank" href={"http://127.0.0.1:8000" + image}><img className='imagi' src = {"http://127.0.0.1:8000" + image} /></a>
+                          
+                        
+                          </div>
+                        </div>}
+                    
                 </div>
             )
         

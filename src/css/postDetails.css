@@ -74,7 +74,7 @@
     box-shadow: var(--shadow-3);
 }
 .icard{
-    width: 700ppx;
+    
     height: 500px;
     margin-bottom: 20px;
     background-color: #CDCDCD;
@@ -207,28 +207,26 @@
     font-weight: 700; 
 }
 .bi{
-    margin-top:30px;
-    margin-left:100px;
-    background-color: #555555;
-    color: white;
-    border: 2px solid #1A0315;
-    border-radius: 5px;
-  
-  padding: 9px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  transition-duration: 0.4s;
-  cursor: pointer;
-  outline: none;
+    background-color: transparent;
+    color: black;
+    border: 2px solid black;
+    text-decoration: none;
+    margin-top:35px;
+    margin-left: 100px;
+    padding: 7px 20px;
+    border-radius: 30px;
+    font-size: 17px;
+    font-weight: bold;
 }
 
   
 .bi:hover {
+    transform: scale(1.2);
     background-color: #1A0315;
+    border: 2px solid #1A0315;
     color: white;
+    transition: 0.4s;
+    cursor: pointer;
   }
 .t{
     min-height: 300px;
@@ -329,6 +327,26 @@
     background: #1A0315;
   }
   .cmntbton{
+    background-color: transparent;
+    color: black;
+    border: 2px solid black;
+    text-decoration: none;
+    margin-top:45px;
+    margin-left: 100px;
+    padding: 7px 20px;
+    border-radius: 30px;
+    font-size: 17px;
+    font-weight: bold;
+}
+.cmntbton:hover{
+    transform: scale(1.2);
+    background-color: #1A0315;
+    border: 2px solid #1A0315;
+    color: white;
+    transition: 0.4s;
+    cursor: pointer;
+}
+  /*.cmntbton{
       margin-top:45px;
       margin-left: 100px;
       
@@ -350,4 +368,26 @@
 .cmntbton:hover {
     background-color: #1A0315;
     color: white;
-  }
+  }*/
+  .imagi{
+    max-width: 100%;
+    display: block;
+    
+ }
+ .cmntimgiiicard{
+    width: 700px;
+    height: 500px;
+    background-color: #CDCDCD;
+    box-shadow: var(--shadow-2);
+    border-radius: var(--radius-2);
+    margin-left: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    transition-property: box-shadow;
+    overflow: hidden;
+}
+.cmntimgiiicard:is(:hover, :focus-within) {
+    box-shadow: var(--shadow-3);
+}
