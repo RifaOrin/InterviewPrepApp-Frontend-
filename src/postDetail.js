@@ -77,7 +77,12 @@ function PostDetailPage() {
               setAuthorName(response.data.author_name)
               
             })
-          .catch((error) => setIsError(error.message));
+          .catch((error) => {
+            setIsError(error.message)
+            if (error.message == "Request failed with status code 401"){
+              navigate('/login')
+            }
+          });
 
 
 
@@ -160,9 +165,10 @@ function PostDetailPage() {
       })
       .then(res => {
         console.log(res.data.bump)
+        window.location.reload();
       })
       .catch((error) => setBumpError(error.message));
-      window.location.reload();
+      
     }
 
     //                                                   Posting More Images with Add more Image (.POST)

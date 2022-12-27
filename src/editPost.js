@@ -33,6 +33,22 @@ function EditPost(){
         setAuthor(res.data.id)
         setPoster(res.data.username)
       })
+
+      //                                                                      Current Post Infos
+
+      axios
+      .get( "http://127.0.0.1:8000/api/post/post/" + post_id + "/")
+      .then((response) => {
+        setText(response.data.text)
+        setTitle(response.data.title)
+        setCategory(response.data.category)
+        
+      })
+    .catch((error) => {
+      if (error.message == "Request failed with status code 401"){
+        navigate('/login')
+      }
+    });
     }, [])
   
   
@@ -44,10 +60,11 @@ function EditPost(){
     }
   
   
-    //                                                                             CREATING NEW POST (.POST)
+    //                                                                             Editing POST (.PUT)
     const edit = (e) =>
     {
       e.preventDefault();
+      console.log(image)
       axios.interceptors.request.use(
         config => {
           config.headers.authorization = `JWT ${Access}`;
@@ -93,10 +110,8 @@ function EditPost(){
               <h1 className="heading"><b>Edit Post</b> </h1>
               
               <form className='newposti'>
-                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Title" onChange={(e)=>setTitle(e.target.value)} required/>
-                  {/*<input type="text" className="input-box" placeholder="Enter Title" onChange={(e)=>setTitle(e.target.value)} required/>*/}
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Text" onChange={(e)=>setText(e.target.value)} required/>
-                  {/*<input type="text" className="input-box-text" placeholder="Enter Text"onChange={(e)=>setText(e.target.value)} required/>*/} 
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Title" value = {title }onChange={(e)=>setTitle(e.target.value)} required/>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Text" value = {text} onChange={(e)=>setText(e.target.value)} required/>
               </form>   
              <div class="spt">
               <div class="postimage_field">
