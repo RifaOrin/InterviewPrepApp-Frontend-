@@ -1,4 +1,5 @@
 @import "https://unpkg.com/open-props";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 :root {
   --transition: 250ms ease-in-out;
@@ -68,11 +69,13 @@ picture {
   transition: var(--transition);
   transition-property: box-shadow;
   overflow: hidden;
+  
 }
-
 .card:is(:hover, :focus-within) {
   box-shadow: var(--shadow-3);
 }
+
+
 
 .card__img-container {
   width: 100%;

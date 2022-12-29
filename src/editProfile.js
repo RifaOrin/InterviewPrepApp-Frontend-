@@ -30,6 +30,15 @@ function EditProfile(){
           .get(user)
           .then((res) => {
             setAuthor(res.data.id)
+            axios
+            .get(Url + res.data.id + '/')
+            .then((res) => {
+              setName(res.data.name)
+              setWork(res.data.works_at)
+              setGender(res.data.gender)
+              setLives(res.data.lives)
+      
+            })
            
           })
           
@@ -75,15 +84,15 @@ function EditProfile(){
         <div className = "EditProfile">
             <h1 className='edit'>Edit Profile</h1>
             <form className='editForm'>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Name" onChange={(e)=>setName(e.target.value)} required/>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Workplace" onChange={(e)=>setWork(e.target.value)} required/>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lives in (city, country)" onChange={(e)=>setLives(e.target.value)} required/>
-            <label className='lbl'>Gender : </label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Name" value={name} onChange={(e)=>setName(e.target.value)} required/>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Workplace" value={work} onChange={(e)=>setWork(e.target.value)} required/>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lives in (city, country)" value={lives} onChange={(e)=>setLives(e.target.value)} required/>
+            {/*<label className='lbl'>Gender : </label>
                  <select name="gender" className='gndr' onChange={(e)=>setGender(e.target.value)}>
                   <option className='opt' value="Male" selected>Male</option>
                   <option className='opt' value="Female">Female</option>
                   <option className='opt' value="Other">Other</option>
-                </select>
+    </select>*/}
             </form>
             <form className='editFrm'>
             <div className='prof'>

@@ -77,7 +77,12 @@ function PostDetailPage() {
               setAuthorName(response.data.author_name)
               
             })
-          .catch((error) => setIsError(error.message));
+            .catch((error) => {
+              setIsError(error.message)
+              if (error.message == "Request failed with status code 401"){
+                navigate('/login')
+              }
+            });
 
 
 
@@ -160,9 +165,10 @@ function PostDetailPage() {
       })
       .then(res => {
         console.log(res.data.bump)
+        window.location.reload();
       })
       .catch((error) => setBumpError(error.message));
-      window.location.reload();
+      
     }
 
     //                                                   Posting More Images with Add more Image (.POST)
@@ -205,12 +211,13 @@ function PostDetailPage() {
       })
     }
 
-    const deleteComment = (e) => {
+    const deleteComment = (e, pk) => {
       e.preventDefault();
       axios
-      .delete(baseUrl + post_id + '/comment/')
+      .delete(baseUrl + post_id + '/comment/' + pk + '/')
       .then(() => {
         alert("comment deleted")
+        window.location.reload();
       })
     }
 
@@ -219,14 +226,21 @@ function PostDetailPage() {
       navigate(`/post/edit/${post_id}`)
     }
 
-   
+    const reportPost = (e) => {
+      e.preventDefault();
+      navigate(`/post/report/${post_id}`)
+    }
+    const editComment = (e, pk) => {
+      e.preventDefault();
+      navigate(`/post/${post_id}/comment/${pk}/edit`)
+    }
     return (
         
             <body className='detailBody'>
                 <Navbar/>
                 <div className="PostDetailPage">
                 {isError === "Request failed with status code 401" && <div className='alert alert-danger' role = 'alert'>You are not Logged in. <Link to={"/login"}>Log In</Link> </div>}
-                <h1 className = "details"> POST DETAILS</h1>
+                
                 <div className = "detailsCard">
                   
                   <div className = "grid-c">
@@ -254,6 +268,9 @@ function PostDetailPage() {
                   }
                    {commentAuthorName === authorName &&
                   <button className="deletePost" onClick={deletePost}><i className='fa fa-trash' id="iconleft"/>Delete</button>}
+
+                  {commentAuthorName !== authorName &&
+                  <button className="deletePost" onClick={reportPost}><i className='fa fa-ban' id="iconleft"/>Report</button>}  
                   </div>
                   
                 </div>
@@ -261,9 +278,6 @@ function PostDetailPage() {
 
 
                 {commentAuthorName === authorName && <div className='addcard'>
-                {
-                /*<label ><b>Add More Images: </b></label>
-                <input  type="file" name="image" accept = "image/*" onChange={handleImage}/>*/}
                 
                   <label for="formFile" class="form-label">Add more images</label>
                   <input class="form-control" type="file" id="formFile" accept = "image/*" onChange={handleImage}/>
@@ -271,7 +285,7 @@ function PostDetailPage() {
                 <button className='bi' onClick = {imagehandle}><i className='fa fa-upload' id="iconleft"/><b>Upload Image</b></button>
                 
                 </div>}
-                <h1 className="more" >More Images</h1>
+                {image.length != 0 && <h1 className="more" >More Images</h1>}
                 {image.map((images) => {
                       const {image} = images;
                       return(
@@ -292,47 +306,42 @@ function PostDetailPage() {
                   
                   <label for="comment" className='cmnt'><b>Comment: </b></label>
                   <input type="text" class="form-control" id="hlw" onChange={(e)=>setCommentTitle(e.target.value)}/>
-                  {/*<input type="text" name="comment" onChange={(e)=>setCommentTitle(e.target.value)}/>*/}
                 
                 <div className='cmntimg'>
                   <label for="formFile" class="form-label">Comment image:</label>
                   <input class="form-control" type="file" id="formFile" accept = "image/*" onChange={handleCommentImage}/>
-
-                  
-                  {/*<label><b>Comment Image: </b></label>
-                  <input type="file" name="image" accept = "image/*"  /> {/*onChange={handleCommentImage}*/}
                 </div>
                 <button className="cmntbton" onClick = {commentHandler}><i className="fa fa-paper-plane" id="iconleft"/><b>Comment</b></button>
                 </div>
 
                 
-                <h2 className='com'>Comments</h2>
+                {commentData.length != 0 && <h2 className='com'>Comments</h2>}
                 {commentData.map((comments) => {
-                const {text} = comments;
-                const {author_name} = comments;
-                const{image} = comments;
+                const {text, author_name, image, pk} = comments;
+                
                 return(
                 <div className="Comment">
                     
                     <p className='cmnttxt'>{text}</p>
                     <p className='authortxt'> - {author_name} </p>
-                    { image != null &&<div className='cmntimgiiicard'>
+                    { image != null && <div className='cmntimgiiicard'>
                      <div className = "imagei">
                          <a target="_blank" href={"http://127.0.0.1:8000" + image}><img className='imagi' src = {"http://127.0.0.1:8000" + image} /></a>
                           
                         
                           </div>
+                          
                         </div>}
-                    
+                        <div className='cbton'>
+                          <button className="editcmnt" onClick = {(e) => editComment(e, pk)}><i className='fa fa-edit' id="iconleft"/>Edit</button>
+                          <button className="deletecmnt" onClick={(e) => deleteComment(e, pk)}><i className='fa fa-trash' id="iconleft"/>Delete</button>
+                        </div>
                 </div>
             )
         
         })}
                 </div>
                 </body>
-           
-        
-      
     );
   }
   

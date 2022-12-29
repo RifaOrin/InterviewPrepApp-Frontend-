@@ -69,7 +69,7 @@
 .gndr{
     margin-left: 10px;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     background-color: #196cbb;
     color: white;
     border: 2px solid #0828d8;
@@ -81,7 +81,7 @@
     
     background-color: #196cbb;
     color: white;
-    border: 2px solid #0828d8;
+    border: 2px solid #196cbb;
     border-radius: 5px;
     padding: 9px 16px;
     text-align: center;
