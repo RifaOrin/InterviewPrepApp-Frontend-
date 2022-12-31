@@ -19,12 +19,13 @@
     background-color: var(--color-secondary);
     height: 80px;
     width: 100%;
+    
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 5%;
     position: sticky;
-    z-index: 1000000000000;
+    z-index: 10000000000;
     border-bottom: 1px solid #C5C5C5;
     
 }
@@ -43,6 +44,7 @@
     list-style: none;
     display: flex;
 }
+
 .navbar ul li{
     padding: 22px 30px;
     position: relative;
@@ -50,14 +52,38 @@
 .navbar ul li a{
     color: #3C4C70;
     text-decoration: none;
-    font-size: 20px;
+    font-weight: bold;
+    font-size: 19px;
     transition: all 0.3s;
+    letter-spacing: 0.5px;
+    
+
+    
+}
+.testing{
+    padding: 0 10px;
+    z-index: 1;
+}
+.navbar ul li .testing::after{
+    content: "";
+    position: absolute;
+    background-color: var(--color-primary);
+    height: 3px;
+    width: 0;
+    left: 0;
+    bottom: -10px;
+    transition: 0.3s;
 }
 .navbar ul li a:hover{
     color: var(--color-primary);
+    
+}
+.navbar ul li .testing:hover::after{
+    width: 100%;
 }
 .dropdown-menu{
     display: none;
+    
 }
 .navbar ul li:hover .dropdown-menu{
     display: block;
@@ -69,21 +95,42 @@
 .dropdown-menu ul{
     display: block;
     margin: 10px;
+    
+    
 }
 .dropdown-menu ul li{
     width: 150px;
     padding: 10px;
     margin-left: -35px;
+    display: block;
 }
+.dropdown-menu ul li:hover{
+    background-color: #ddd;
+}
+
 .navbton{
     background-color: var(--color-secondary);
     color: #3C4C70;
-    font-size: 18px;
-    font-weight: 500;
+    letter-spacing: 0.5px;
+    font-weight: bold;
+   font-size: 18px;
     border: none;
+}
+.navbton::after{
+    content: "";
+    position: absolute;
+    background-color: var(--color-primary);
+    height: 3px;
+    width: 0;
+    left: 0;
+    bottom: -10px;
+    transition: 0.3s;
 }
 .navbton:hover{
     color: var(--color-primary);
+}
+.navbton:hover::after{
+    width: 100%;
 }
 #iconleft{
     padding-right: 5px;

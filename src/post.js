@@ -1,9 +1,11 @@
 import './css/post.css';
 import {useEffect, useState} from "react";
 import axios from 'axios';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import NewPost from "./newPost";
 import Navbar from './navbar';
+import PostSearch from './postSearch';
+import NewPost from "./newPost";
 
 function Post() {
     const baseUrl = "http://127.0.0.1:8000/api/post/post/"
@@ -14,7 +16,6 @@ function Post() {
     const[previousUrl, setPreviousUrl] = useState();
     const[search, setSearch] = useState("");
     const navigate = useNavigate();
-
     useEffect(() => {
         axios
           .get(baseUrl)
@@ -41,26 +42,36 @@ function Post() {
             setNextUrl(response.data.next)
             setPreviousUrl(response.data.previous)
           }) 
-          .catch((error) => {
-            paginationError(error.message)
-          });
+
+          .catch((error) => setPaginationError(error.message));
+
     }
 
     const searchPost = (e) => {
       e.preventDefault();
       navigate(`/post/filter/search=${search}`)
     }
+
     return (
       
         <body className="postbody">
           <Navbar/>
+          <PostSearch/>
+          
+        {/*<input type="text" name="search_field"  onChange={(e)=>setSearch(e.target.value)} required />
+        <button  onClick={searchPost}><b>Search</b></button>*/}
          <NewPost/> 
         <div className="Post">
         
         {Error === "Request failed with status code 401" && <div className='alert alert-danger' role = 'alert'>You Can Not See Any Post Before Logging In. <Link to={"/login"}>Log In</Link> </div>}
+
+        
+
+
         <label>Search: </label>
         <input type="text" name="search_field"  onChange={(e)=>setSearch(e.target.value)} required />
         <button  onClick={searchPost}><b>Search</b></button>
+
         {myPost.map((feed) => {
             const {title, date, author_name, pk, category, cover, author, bump} = feed;
         

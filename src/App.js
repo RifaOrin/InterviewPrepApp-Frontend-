@@ -14,7 +14,9 @@ import FilterPost from './filterpost';
 import Navbar from './navbar';
 import About from './about';
 import EditPost from './editPost';
-
+import PostSearch from './postSearch';
+import PostReport from './postReport';
+import EditComment from './editComment';
 import {
   BrowserRouter as Router,
   Routes,
@@ -30,6 +32,12 @@ function App() {
           <Route path="/" element={<HomePage/>}></Route>
         </Routes>
         <Routes>
+          <Route path="/post/:post_id/comment/:comment_id/edit" element={<EditComment/>}></Route>
+        </Routes>
+        <Routes>
+          <Route path="/search" element={<PostSearch/>}></Route>
+        </Routes>
+        <Routes>
           <Route path="/login" element={<LoginPage/>}></Route>
         </Routes>
         <Routes>
@@ -40,6 +48,9 @@ function App() {
         </Routes>
         <Routes>
           <Route path="/post/filter/:criteria" element={<FilterPost/>}></Route>
+        </Routes>
+        <Routes>
+          <Route path="/post/report/:post_id" element={<PostReport/>}></Route>
         </Routes>
         <Routes>
           <Route path="/profile" element={<Profile/>}></Route>

@@ -23,8 +23,9 @@ function SignUp(){
         })
         .then((response) => {
             setUserId(response.data.Object.id)
-            navigate('/activate')
-        
+
+            //navigate('/activate')
+            alert("Please check your E-mail for activation mail")
         })
         .catch((error) => {
             if (error.response.data.email !== undefined) {
@@ -65,7 +66,10 @@ function SignUp(){
                    <input class="signup__input" type="password" name="password" id="password" onChange={(e)=>setPassword(e.target.value)}required />
                    <label class="signup__label" for="password">Password</label>
            </div>
-            <button className="Register" onClick={signin}><b>Sign Up</b></button>   
+
+            
+            <button className="Register" onClick={signin}><b>Sign Up</b></button>
+       
             </form> 
         
         </div>

@@ -24,6 +24,7 @@
     line-height: var(--font-lineheight-3);
   }
 .detailsCard {
+    margin-top: 20px;
     min-height: 1200px;
     max-width: 1182px;
     max-height: 4000px;
@@ -75,6 +76,7 @@
 }
 .icard{
     
+    width: 700px;
     height: 500px;
     margin-bottom: 20px;
     background-color: #CDCDCD;
@@ -390,4 +392,53 @@
 }
 .cmntimgiiicard:is(:hover, :focus-within) {
     box-shadow: var(--shadow-3);
+}
+.cbton{
+    display: flex;
+    flex-wrap: wrap;
+   justify-content: space-between;
+   margin-right: 100px;
+   margin-left: 100px;
+ }
+ .editcmnt{
+    background-color: transparent;
+    color: black;
+    border: 2px solid black;
+    text-decoration: none;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    
+    padding: 7px 20px;
+    border-radius: 30px;
+    font-size: 17px;
+    font-weight: bold;
+}
+.editcmnt:hover{
+    transform: scale(1.2);
+    background-color: #1A0315;
+    border: 2px solid #1A0315;
+    color: white;
+    transition: 0.4s;
+    cursor: pointer;
+}
+.deletecmnt{
+    background-color: transparent;
+    color: black;
+    border: 2px solid black;
+    text-decoration: none;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    
+    padding: 7px 20px;
+    border-radius: 30px;
+    font-size: 17px;
+    font-weight: bold;
+}
+.deletecmnt:hover{
+    transform: scale(1.2);
+    background-color: #1A0315;
+    border: 2px solid #1A0315;
+    color: white;
+    transition: 0.4s;
+    cursor: pointer;
 }

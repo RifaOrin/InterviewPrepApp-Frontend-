@@ -1,4 +1,5 @@
 import './css/newPost.css';
+import './css/editPost.css';
 import {useEffect, useState} from "react";
 import axios from 'axios';
 import { useNavigate, Link, useParams } from "react-router-dom";
@@ -103,15 +104,19 @@ function EditPost(){
   
       return (
         
-       <body className="newpostBody">
+       <body className="editBody">
          <div className="newpostPage">
            {postError === "Request failed with status code 401" && <div className='alert alert-danger' role = 'alert'>You Can Not Post Anything without Logging In. <Link to={"/login"}>Log In</Link> </div>}
            <form  className="newpost" onSubmit={e => e.preventDefault()}>
               <h1 className="heading"><b>Edit Post</b> </h1>
               
               <form className='newposti'>
-                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Title" value = {title }onChange={(e)=>setTitle(e.target.value)} required/>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Text" value = {text} onChange={(e)=>setText(e.target.value)} required/>
+
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Title" value = {title} onChange={(e)=>setTitle(e.target.value)} required/>
+                  
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Text" value={text} onChange={(e)=>setText(e.target.value)} required/>
+                 
+
               </form>   
              <div class="spt">
               <div class="postimage_field">
@@ -132,7 +137,7 @@ function EditPost(){
               </div>
               
               <div class="bton">
-              <button className="postButton" onClick = {edit}><b>Edit</b></button>
+              <button className="postButton" onClick = {edit}><i className='fa fa-edit' id="iconleft"/><b>Edit</b></button>
               </div>
               </form> 
         </div>

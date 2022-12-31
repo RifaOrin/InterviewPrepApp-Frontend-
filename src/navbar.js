@@ -44,12 +44,12 @@ function Navbar(){
           <h1 className='lgo'>Zar<span>Code</span></h1>
             <ul>
             
-            <li><a href='/'><i class="fa fa-home" id="iconleft" />Home</a></li>
+            <li><a className="testing" href='/'><i class="fa fa-home" id="iconleft" />Home</a></li>
             
-            <li><a href = "about"><i class="fa fa-info-circle" id="iconleft" />About</a></li>
-            <li><a href = "/post"><i class="fa fa-newspaper" id="iconleft"/>Feed</a></li>
+            <li><a className="testing" href = "/about"><i class="fa fa-info-circle" id="iconleft" />About</a></li>
+            <li><a className="testing" href = "/post"><i class="fa fa-newspaper" id="iconleft"/>Feed</a></li>
             <li>
-              <a href = "#">Category <i class="fa fa-caret-down"/></a>
+              <a className="testing" href = "#">Category <i class="fa fa-caret-down"/></a>
               <div class="dropdown-menu">
                       <ul>
                         <li><a href="/post/filter/category=entertainment">Entertainment</a></li>
@@ -59,7 +59,7 @@ function Navbar(){
               </div>
               </li>
             <li>
-              <a href = "#">Sort by <i class="fa fa-caret-down"/></a>
+              <a className="testing" href = "#">Sort by <i class="fa fa-caret-down"/></a>
               <div class="dropdown-menu">
                       <ul>
                         <li><a href="/post/filter/ordering=bump">Bump<i class="fa fa-angle-double-up" id="iconright"/></a></li>
@@ -70,8 +70,8 @@ function Navbar(){
               </div>
               </li>
             
-           {localStorage.accessToken != null && <li><a href ="/profile"><i class="fa fa-user-circle" id="iconleft" />{username}</a></li>}
-           {localStorage.accessToken != null && <li><button className='navbton' onClick = {logout} ><i class="fa fa-power-off" id="iconleft"/> Log Out</button></li>}
+           {localStorage.accessToken != null && <li><a className="testing" href ="/profile"><i class="fa fa-user-circle" id="iconleft" />{username}</a></li>}
+           {localStorage.accessToken != null && <li><button className='navbton' onClick = {logout} ><i class="fa fa-power-off" id="iconleft"/>Log Out</button></li>}
           </ul>
           
           </div>
