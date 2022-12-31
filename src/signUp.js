@@ -15,7 +15,6 @@ function SignUp(){
 
     const signin = (e) =>{
         e.preventDefault();
-        
         axios
         .post(Url, {
             email,
@@ -24,9 +23,9 @@ function SignUp(){
         })
         .then((response) => {
             setUserId(response.data.Object.id)
+
             //navigate('/activate')
             alert("Please check your E-mail for activation mail")
-        
         })
         .catch((error) => {
             if (error.response.data.email !== undefined) {
@@ -48,9 +47,10 @@ function SignUp(){
         <div className="singupPage">
             
             <form  class="signup">
+                
             <h1 className="title">Create account</h1>
             <h2 className='acc'>Already have an account? <span className="spn"><Link to = '/login'>Log in</Link></span></h2>
-
+            
                <div class="signup__field">
                     <input class="signup__input" type="text" name="username" id="username" onChange={(e)=>setUsername(e.target.value)} required />
                     <label class="signup__label" for="username">Username</label>
@@ -59,20 +59,18 @@ function SignUp(){
              <div class="signup__field">
                     <input class="signup__input" type="text" name="email" id="email" onChange={(e)=>setEmail(e.target.value)} required />
                     <label class="signup__label" for="email">Email</label>
+                    
             </div>
 
             <div class="signup__field">
                    <input class="signup__input" type="password" name="password" id="password" onChange={(e)=>setPassword(e.target.value)}required />
                    <label class="signup__label" for="password">Password</label>
            </div>
+
             
             <button className="Register" onClick={signin}><b>Sign Up</b></button>
-            
-
+       
             </form> 
-            
-            
-            
         
         </div>
         </body>

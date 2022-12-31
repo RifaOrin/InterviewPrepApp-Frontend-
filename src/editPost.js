@@ -111,10 +111,12 @@ function EditPost(){
               <h1 className="heading"><b>Edit Post</b> </h1>
               
               <form className='newposti'>
+
                   <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Title" value = {title} onChange={(e)=>setTitle(e.target.value)} required/>
                   
                   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Text" value={text} onChange={(e)=>setText(e.target.value)} required/>
                  
+
               </form>   
              <div class="spt">
               <div class="postimage_field">
