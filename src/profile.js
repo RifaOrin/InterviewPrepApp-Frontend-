@@ -85,14 +85,18 @@ function Profile() {
       .catch((error) => {
         let count = 0
         while (error.message === "Request failed with status code 401"){
-          window.location.reload();
-          count = count + 1
           if (count === 1) {
             navigate('/login')
             break;
           }
+          else{
+            window.location.reload();
+            count = count + 1
+          }
+          
+         
         }
-      }); 
+      });
 
   }, []);
 

@@ -84,7 +84,7 @@ function EditProfile(){
         <div className = "EditProfile">
             <h1 className='edit'>Edit Profile</h1>
             <form className='editForm'>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Name" value={name} onChange={(e)=>setName(e.target.value)} required/>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Full Name" value={name} onChange={(e)=>setName(e.target.value)} required/>
             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Workplace" value={work} onChange={(e)=>setWork(e.target.value)} required/>
             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lives in (city, country)" value={lives} onChange={(e)=>setLives(e.target.value)} required/>
             {/*<label className='lbl'>Gender : </label>

@@ -16,6 +16,7 @@ function PostDetailPage() {
     const [author, setAuthor] = useState("");
     const [bump, setBump] = useState("");
     const[authorName, setAuthorName] = useState("");
+    const[category, setCategory] = useState("");
 
     //                                                                             Comment
     const [commentData, setComment] = useState([]);
@@ -35,10 +36,14 @@ function PostDetailPage() {
     const[commentPostError, setCommentPostError] = useState("");
     const[bumpError, setBumpError] = useState("");
 
+    //                                                                          currently logged in
+    const[currentUser, setCurrentUser] = useState("");
+    const[currentUserID, setCurrentUserID] = useState("");
+
     const navigate = useNavigate();
     useEffect(() => {
 
-      //                                                     AUTHOR that is CURRENTLY LOGGED IN and about to comment (INTERCEPTOR AND .GET)                        
+      //                                                     AUTHOR that is CURRENTLY LOGGED IN (INTERCEPTOR AND .GET)                        
 
 
       axios.interceptors.request.use(
@@ -53,8 +58,10 @@ function PostDetailPage() {
       axios
       .get(user)
       .then((res) => {
+        setCurrentUserID(res.data.id)
         setCommentAuthor(res.data.id)
         setCommentAuthorName(res.data.username)
+        setCurrentUser(res.data.username)
         //console.log(res.data.id)
       })
       //console.log(author)
@@ -75,6 +82,7 @@ function PostDetailPage() {
               setBump(response.data.bump)
               setCoverImage(response.data.cover)
               setAuthorName(response.data.author_name)
+              setCategory(response.data.category)
               
             })
             .catch((error) => {
@@ -83,7 +91,6 @@ function PostDetailPage() {
                 navigate('/login')
               }
             });
-
 
 
 
@@ -150,7 +157,11 @@ function PostDetailPage() {
         window.location.reload();
         
       })
-      .catch((error) => alert("You're not logged in!"));
+      .catch((error) => {
+        if (error.response.text == "This field may not be blank."){
+          alert("You cannot leave the text field empty")
+        }
+      });
       //window.location.reload();
     }
 
@@ -162,7 +173,8 @@ function PostDetailPage() {
         bump : bump + 1,
         author : author,
         text : text,
-        title : title
+        title : title,
+        category : category
       })
       .then(res => {
         console.log(res.data.bump)
@@ -333,10 +345,10 @@ function PostDetailPage() {
                           </div>
                           
                         </div>}
-                        <div className='cbton'>
+                        {commentAuthorName === author_name && <div className='cbton'>
                           <button className="editcmnt" onClick = {(e) => editComment(e, pk)}><i className='fa fa-edit' id="iconleft"/>Edit</button>
                           <button className="deletecmnt" onClick={(e) => deleteComment(e, pk)}><i className='fa fa-trash' id="iconleft"/>Delete</button>
-                        </div>
+                        </div>}
                 </div>
             )
         

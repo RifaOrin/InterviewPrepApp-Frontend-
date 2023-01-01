@@ -71,7 +71,7 @@ function CreateProfile(){
         <div className = "CreateProfile">
             <h1 className="create">Create Profile</h1>
             <form className='createForm'>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Name" onChange={(e)=>setName(e.target.value)} required/>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Full Name" onChange={(e)=>setName(e.target.value)} required/>
             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Workplace" onChange={(e)=>setWork(e.target.value)} required/>
             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lives in (city, country)" onChange={(e)=>setLives(e.target.value)} required/>
             
